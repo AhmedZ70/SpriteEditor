@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>799</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QSlider" name="verticalSlider">
+   <widget class="QSlider" name="fpsSlider">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>110</y>
+      <x>700</x>
+      <y>90</y>
       <width>41</width>
       <height>271</height>
      </rect>
@@ -36,47 +36,21 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>500</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>530</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Open</string>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>-10</y>
+      <y>20</y>
       <width>500</width>
       <height>500</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="addFrameButton">
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>500</y>
+      <y>530</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -85,11 +59,11 @@
      <string>Add</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="deleteFrameButton">
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>530</y>
+      <y>570</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -98,11 +72,11 @@
      <string>Delete</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="duplicateFrameButton">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>500</y>
+      <x>370</x>
+      <y>550</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -111,7 +85,7 @@
      <string>Duplicate</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="playSpriteButton">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -124,57 +98,146 @@
      <string>Play-Back</string>
     </property>
    </widget>
-   <widget class="QToolBox" name="toolBox">
+   <widget class="QPushButton" name="undoButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>530</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Undo</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="redoButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>550</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Redo</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="frameSelectorLabel">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>560</y>
+      <width>58</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Frame #</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="frameSelectorSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>530</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="fpsLabel">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>360</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FPS</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="pencilButton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>10</y>
-      <width>101</width>
-      <height>201</height>
+      <y>20</y>
+      <width>41</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="currentIndex">
-     <number>0</number>
+    <property name="mouseTracking">
+     <bool>false</bool>
     </property>
-    <widget class="QWidget" name="page">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>101</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Colors</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="page_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>101</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <attribute name="label">
-      <string>Page 2</string>
-     </attribute>
-    </widget>
+    <property name="text">
+     <string>Pencil</string>
+    </property>
+    <property name="icon">
+     <iconset theme="battery-caution"/>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="eraserButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>Eraser</string>
+    </property>
+    <property name="icon">
+     <iconset theme="battery-caution"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="colorPicker">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>100</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ColorPicker</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="duplicateFrameButton_2">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>530</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="duplicateFrameButton_3">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>550</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load</string>
+    </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
