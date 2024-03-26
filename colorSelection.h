@@ -1,0 +1,4 @@
+#ifndef COLORSELECTION_H
+#define COLORSELECTION_H
+
+#endif // COLORSELECTION_H

@@ -1,0 +1,4 @@
+#ifndef SPRITEMODEL_H
+#define SPRITEMODEL_H
+
+#endif // SPRITEMODEL_H
