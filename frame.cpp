@@ -7,4 +7,3 @@
  * This cpp file contains the method definitions for a frame to be used in a sprite editor app.
 */
 
-Frame::Frame() {}
