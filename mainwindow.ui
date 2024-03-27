@@ -201,13 +201,23 @@
      <string>ColorPicker</string>
     </property>
    </widget>
-   <widget class="Sprite" name="drawPanel" native="true">
+   <widget class="QWidget" name="drawPanel" native="true">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>10</y>
+      <x>150</x>
+      <y>30</y>
       <width>500</width>
-      <height>500</height>
+      <height>501</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="framesList">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>130</y>
+      <width>101</width>
+      <height>192</height>
      </rect>
     </property>
    </widget>
@@ -261,14 +271,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>Sprite</class>
-   <extends>QWidget</extends>
-   <header location="global">sprite.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

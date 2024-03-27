@@ -1,9 +1,9 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include "pixel.h"
 #include <QColor>
 #include <QColormap>
+#include <QImage>
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -14,29 +14,23 @@
 
 class Frame{
 private:
-    // private pixel map object for a frame
-    QColormap pixelMap;
 
-
+    QImage image;
 public:
-    /// @brief Frame constructor that initializes an array of pixels.
-    Frame();
 
-    /// @brief Copy constructor that will create a copy of a Frame.
-    /// @param otherFrame the frame to be copied
-    Frame(const Frame& otherFrame);
+    Frame(int width, int height) : image(width, height, QImage::Format_ARGB32) {
+        image.fill(Qt::white);
+    }
 
-    /// @brief Destructor.
-    ~Frame();
+    QImage &getImage() { return image; }
+    const QImage &getImage() const { return image; }
 
-    /// @brief Gets the QColor of a specified pixel to save/manipulate
-    /// @param x and y locations of the pixel
-    /// @return QColor
-    QColor getColor(int x, int y);
+    void setPixel(int x, int y, const QColor &color) {
+        if (x >= 0 && x < image.width() && y >= 0 && y < image.height()) {
+            image.setPixelColor(x, y, color);
+        }
+    }
 
-    /// @brief Sets the pixel with a QColor at a specific x and y
-    /// @param x and y locations of the pixel
-    void setPixel(int x, int y, QColor color);
 };
 
 #endif // FRAME_H

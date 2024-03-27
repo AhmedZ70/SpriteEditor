@@ -1,27 +1,46 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <QWidget>
-#include <QMouseEvent>
-#include <QPainter>
+#include "Frame.h"
+#include <vector>
 
-class Sprite : public QWidget {
-    Q_OBJECT
+/**
+ * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
+ * @date April. 1, 2024
+ * @name sprite h file for assignment7
+ * This h file contains the outlined methods for use within a sprite.
+ * A sprite is essentially a collection of frames that can be animated.
+*/
+
+class Sprite {
+private:
+    std::vector<Frame> frames;
 
 public:
-    explicit Sprite(QWidget *parent = nullptr);
+    Sprite() = default;
 
-protected:
-    void paintEvent(QPaintEvent *event) override;
+    void addFrame(const Frame &frame) {
+        frames.push_back(frame);
+    }
 
-    void mousePressEvent(QMouseEvent *event) override;
+    void removeFrame(size_t index) {
+        if (index < frames.size()) {
+            frames.erase(frames.begin() + index);
+        }
+    }
 
-    void mouseMoveEvent(QMouseEvent *event) override;
+    Frame &getFrame(size_t index) {
+        return frames.at(index);
+    }
 
-private:
-    QImage image;
+    const Frame &getFrame(size_t index) const {
+        return frames.at(index);
+    }
 
-    void drawPixel(const QPoint &position);
+    size_t frameCount() const {
+        return frames.size();
+    }
+
 };
 
 #endif // SPRITE_H
