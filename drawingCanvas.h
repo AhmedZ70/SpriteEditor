@@ -4,85 +4,79 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QPainter>
-#include "Frame.h"
-#include "Sprite.h"
+#include "frame.h"
+#include "sprite.h"
+
+/**
+ * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
+ * @date April. 1, 2024
+ * @name drawingCanvas h file for assignment8
+ * This h file contains the outlined methods for use within the DrawingCanvas.
+ * DrawingCanvas is in-charge of the pixel drawing for our Sprite Editor
+*/
 
 class DrawingCanvas : public QWidget {
     Q_OBJECT
 
-public:
-    explicit DrawingCanvas(QWidget *parent = nullptr)
-        : QWidget(parent), sprite(), currentColor(Qt::blue), currentFrameIndex(0) {
-        setAttribute(Qt::WA_StaticContents);
-        sprite.addFrame(Frame(32, 32));
-    }
-    int getFrameCount() const {
-        return sprite.frameCount();
-    }
-    QImage getFrameThumbnail(int index) {
-        if (index >= 0 && index < sprite.frameCount()) {
-            return sprite.getFrame(index).getImage().scaled(64, 64, Qt::KeepAspectRatio, Qt::FastTransformation); // Example size
-        }
-        return QImage();
-    }
-    void setCurrentFrameIndex(int index) {
-        if (index >= 0 && index < sprite.frameCount()) {
-            currentFrameIndex = index;
-            update(); // Redraw with the new current frame
-        }
-    }
-    // Public method to set the current drawing color
-    void setCurrentColor(const QColor &color) {
-        currentColor = color;
-    }
-    void addNewFrame() {
-        sprite.addFrame(Frame(32, 32)); // Assuming all frames are the same size
-        currentFrameIndex = sprite.frameCount() - 1; // Switch to the new frame
-        update(); // Redraw the canvas
-    }
-
-protected:
-    void paintEvent(QPaintEvent *) override {
-        QPainter painter(this);
-        if (sprite.frameCount() > 0) {
-            QImage scaledImage = sprite.getFrame(currentFrameIndex).getImage().scaled(size(), Qt::KeepAspectRatio, Qt::FastTransformation);
-            painter.drawImage(rect(), scaledImage);
-        }
-    }
-
-    void mouseMoveEvent(QMouseEvent *event) override {
-        if (event->buttons() & Qt::LeftButton) {
-            drawToImage(event->position().toPoint());
-        }
-    }
-
-    void mousePressEvent(QMouseEvent *event) override {
-        if (event->button() == Qt::LeftButton) {
-            drawToImage(event->position().toPoint());
-        }
-    }
-
 private:
+
+    /// The Sprite object containing all frames
     Sprite sprite;
+
+    /// The current color selected for drawing
     QColor currentColor;
+
+    /// The index of the current frame being edited
     int currentFrameIndex;
 
-    void drawToImage(const QPoint &point) {
-        if (currentFrameIndex < sprite.frameCount()) {
-            Frame& currentFrame = sprite.getFrame(currentFrameIndex);
-            QPoint scaledPosition(point.x() * currentFrame.getImage().width() / width(), point.y() * currentFrame.getImage().height() / height());
+    /// @brief Draws a pixel at the specified point on the current frame.
+    /// @param point The point where the pixel should be drawn.
+    void drawToImage(const QPoint &point);
 
-            if(currentFrame.getImage().rect().contains(scaledPosition)) {
-                currentFrame.setPixel(scaledPosition.x(), scaledPosition.y(), currentColor);
-                update();
-            }
+public:
 
-            emit drawingChanged();
-        }
-    }
+    /// @brief Constructs a DrawingCanvas widget.
+    /// @param parent The parent widget. Default is nullptr for top-level widget.
+    explicit DrawingCanvas(QWidget *parent = nullptr);
+
+    /// @brief Returns the total number of frames in the sprite.
+    /// @return The frame count as an integer.
+    int getFrameCount() const;
+
+    /// @brief Retrieves a thumbnail image for a specified frame index.
+    /// @param index The index of the frame.
+    /// @return A QImage representing the thumbnail of the frame.
+    QImage getFrameThumbnail(int index);
+
+    /// @brief Sets the current frame index to the specified value.
+    /// @param index The index of the frame to make current.
+    void setCurrentFrameIndex(int index);
+
+    /// @brief Sets the current drawing color.
+    /// @param color The QColor to set as the current drawing color.
+    void setCurrentColor(const QColor &color);
+
+    /// @brief Adds a new frame to the sprite.
+    void addNewFrame();
+
+protected:
+
+    /// @brief Overridden paint event handler to draw the canvas content.
+    /// @param event The paint event.
+    void paintEvent(QPaintEvent *event) override;
+
+    /// @brief Overridden mouse move event handler for drawing on the canvas.
+    /// @param event The mouse event.
+    void mouseMoveEvent(QMouseEvent *event) override;
+
+    /// @brief Overridden mouse press event handler to start drawing on the canvas.
+    /// @param event The mouse event.
+    void mousePressEvent(QMouseEvent *event) override;
 
 signals:
-    void drawingChanged(); // Could signal to update UI elements related to frame changes
+
+    /// @brief Signal emitted when the drawing on the canvas has changed.
+    void drawingChanged();
 };
 
 #endif // DRAWINGCANVAS_H

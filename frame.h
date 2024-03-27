@@ -8,29 +8,31 @@
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name frame h file for assignment7
+ * @name frame h file for assignment8
  * This h file contains the outlined methods for use within a frame.
 */
 
 class Frame{
 private:
-
+    // Member variable that holds an image displayed on the frame
     QImage image;
+
 public:
 
-    Frame(int width, int height) : image(width, height, QImage::Format_ARGB32) {
-        image.fill(Qt::white);
-    }
+    /// @brief Frame constructor
+    /// @param int width of a frame
+    /// @param int height of a frame
+    Frame(int width, int height);
 
-    QImage &getImage() { return image; }
-    const QImage &getImage() const { return image; }
+    /// @brief Returns the frames QImage
+    /// @return QImage
+    QImage &getImage();
 
-    void setPixel(int x, int y, const QColor &color) {
-        if (x >= 0 && x < image.width() && y >= 0 && y < image.height()) {
-            image.setPixelColor(x, y, color);
-        }
-    }
-
+    /// @brief Sets the color of a pixel in a Frame(QImage) with a QColor
+    /// @param int x pixel coordinate
+    /// @param int y pixel coordinate
+    /// @param QColor color of the pixel to be sets
+    void setPixel(int x, int y, const QColor &color);
 };
 
 #endif // FRAME_H
