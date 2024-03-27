@@ -36,16 +36,6 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>20</y>
-      <width>500</width>
-      <height>500</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="addFrameButton">
     <property name="geometry">
      <rect>
@@ -211,6 +201,16 @@
      <string>ColorPicker</string>
     </property>
    </widget>
+   <widget class="Sprite" name="drawPanel" native="true">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>500</width>
+      <height>500</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -261,6 +261,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Sprite</class>
+   <extends>QWidget</extends>
+   <header location="global">sprite.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
