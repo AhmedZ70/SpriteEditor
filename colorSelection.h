@@ -14,7 +14,6 @@ public:
 
     explicit ColorSelection(QObject *parent = nullptr);
 
-
     QColor selectColor(const QColor &initialColor = Qt::white);
 
     QColor getCurrentColor();

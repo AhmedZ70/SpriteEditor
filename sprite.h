@@ -14,33 +14,21 @@
 
 class Sprite {
 private:
+    //list cntaining the frames of the sprite
     std::vector<Frame> frames;
 
 public:
+    //Default constructor
     Sprite() = default;
-
-    void addFrame(const Frame &frame) {
-        frames.push_back(frame);
-    }
-
-    void removeFrame(size_t index) {
-        if (index < frames.size()) {
-            frames.erase(frames.begin() + index);
-        }
-    }
-
-    Frame &getFrame(size_t index) {
-        return frames.at(index);
-    }
-
-    const Frame &getFrame(size_t index) const {
-        return frames.at(index);
-    }
-
-    size_t frameCount() const {
-        return frames.size();
-    }
-
+    //Adds a frame to the list of frames of the sprite
+    void addFrame(const Frame &frame);
+    //Removes the current frame from the list
+    void removeFrame(size_t index);
+    //Gets the frame from the index, if it doesn't exist doesnt do anything
+    Frame &getFrame(size_t index);
+    //Returns the count of frames
+    size_t frameCount() const;
 };
 
-#endif // SPRITE_H
+//SPRITE_H
+#endif
