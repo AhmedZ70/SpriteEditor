@@ -54,10 +54,27 @@ void MainWindow::on_deleteFrameButton_clicked()
     emit spriteUpdated();
 }
 
-//TODO: Finish the handler method
 void MainWindow::on_eraserButton_clicked(){
-    ui->eraserButton->isEnabled();
+    ui->eraserButton->setEnabled(false);
+    ui->pencilButton->setEnabled(true);
+    emit on_eraserButton_clicked_signal();
+    emit colorSelected(QColor(Qt::white));
 }
+
+void MainWindow::on_pencilButton_clicked(){
+    ui->pencilButton->setEnabled(false);
+    ui->eraserButton->setEnabled(true);
+    emit on_pencilButton_clicked_signal();
+    if(lastUsedColor==""){
+        lastUsedColor = QColor(Qt::red);
+    }
+    emit colorSelected(QColor(lastUsedColor));
+}
+
+// void MainWindow::on_duplicateFrameButton_clicked(){
+//     canvas->addNewFrame();
+//     emit spriteUpdated();
+// }
 
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);
@@ -114,5 +131,6 @@ void MainWindow::on_eraserButton_clicked(){
 void MainWindow::on_colorPicker_clicked(){
 
      QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
+     lastUsedColor = selectedColor;
      emit colorSelected(selectedColor);
  }

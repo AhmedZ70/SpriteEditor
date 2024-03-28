@@ -34,6 +34,8 @@ signals:
     void on_duplicateFrameButtonClicked_Signal();
     void colorSelected(QColor selectedColor);
     void spriteUpdated();
+    void on_eraserButton_clicked_signal();
+    void on_pencilButton_clicked_signal();
 
 
 private slots:
@@ -50,12 +52,16 @@ private slots:
     void onAddFrameButtonClicked();
     void on_deleteFrameButton_clicked();
     void on_eraserButton_clicked();
+    void on_pencilButton_clicked();
     void updateFrameList();
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
+   // void on_duplicateFrameButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
     DrawingCanvas *canvas;
+    QColor lastUsedColor;
 
 };
 #endif // MAINWINDOW_H

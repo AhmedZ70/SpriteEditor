@@ -22,8 +22,4 @@ QColor ColorSelection::selectColor(const QColor &initialColor)
     }
     else
         return initialColor;
-
-
-
-
 }
