@@ -4,6 +4,9 @@
 #include <QColor>
 #include <QColormap>
 #include <QImage>
+#include <QBuffer>
+#include <QByteArray>
+#include <QJsonObject>
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -33,6 +36,15 @@ public:
     /// @param int y pixel coordinate
     /// @param QColor color of the pixel to be sets
     void setPixel(int x, int y, const QColor &color);
+
+    /// @brief Serializes the frame to a JSON object.
+    /// @return QJsonObject the serialized json object
+    QJsonObject toJson() const;
+
+    /// @brief Deserializes the frame from a JSON object.
+    /// @param QJsonObject to deserialize
+    /// @return Frame object after deserialization.
+    static Frame fromJson(const QJsonObject& json);
 };
 
 #endif // FRAME_H
