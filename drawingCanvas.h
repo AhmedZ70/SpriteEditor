@@ -77,6 +77,11 @@ signals:
 
     /// @brief Signal emitted when the drawing on the canvas has changed.
     void drawingChanged();
+
+public slots:
+    void colorChanged(QColor newColor);
 };
+
+
 
 #endif // DRAWINGCANVAS_H

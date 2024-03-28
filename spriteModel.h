@@ -45,7 +45,6 @@ private:
     //PlaySprite animation;
 
 
-
     /// @brief adds a frame for the sprite
     /// @param the frame to be added
     void addFrame(Frame newFrame);

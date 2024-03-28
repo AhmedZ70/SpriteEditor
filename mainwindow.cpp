@@ -18,6 +18,8 @@ MainWindow::MainWindow(SpriteModel& spriteEditor, QWidget *parent)
     connect(ui->addFrameButton, &QPushButton::clicked, this, &MainWindow::onAddFrameButtonClicked);
     connect(this, &MainWindow::spriteUpdated, this, &MainWindow::updateFrameList);
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
+    connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
+
 }
 
 MainWindow::~MainWindow()

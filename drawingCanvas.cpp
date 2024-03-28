@@ -86,3 +86,8 @@ void DrawingCanvas::drawToImage(const QPoint &point) {
         emit drawingChanged();
     }
 }
+
+void DrawingCanvas:: colorChanged(QColor newColor)
+{
+    currentColor = newColor;
+}
