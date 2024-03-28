@@ -21,3 +21,34 @@ void Frame::setPixel(int x, int y, const QColor &color) {
         image.setPixelColor(x, y, color);
     }
 }
+
+QJsonObject Frame::toJson() const {
+    QJsonObject json;
+
+    // Convert QImage to QByteArray in PNG format
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    this->image.save(&buffer, "PNG"); // PNG for lossless compression
+
+    // Convert QByteArray to base64 string and store in JSON
+    json["image"] = QString::fromUtf8(byteArray.toBase64());
+
+    // Store image dimensions
+    json["width"] = this->image.width();
+    json["height"] = this->image.height();
+
+    return json;
+}
+
+Frame Frame::fromJson(const QJsonObject& json) {
+    QByteArray byteArray = QByteArray::fromBase64(json["image"].toString().toUtf8());
+
+    QImage image;
+    image.loadFromData(byteArray, "PNG");
+
+    Frame frame(image.width(), image.height());
+    frame.image = image; // Assuming you add a way to set `image` directly or through the constructor
+
+    return frame;
+}
