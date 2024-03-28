@@ -49,6 +49,12 @@ void DrawingCanvas::addNewFrame() {
     update(); // Redraw the canvas
 }
 
+void DrawingCanvas::deleteFrame(){
+    sprite.removeFrame(currentFrameIndex);
+    currentFrameIndex = sprite.frameCount()-1;
+    update();
+}
+
 // Paint event handler
 void DrawingCanvas::paintEvent(QPaintEvent *) {
     QPainter painter(this);

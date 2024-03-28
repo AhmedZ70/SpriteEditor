@@ -48,6 +48,17 @@ void MainWindow::onAddFrameButtonClicked() {
     canvas->addNewFrame();
     emit spriteUpdated();
 }
+void MainWindow::on_deleteFrameButton_clicked()
+{
+    canvas->deleteFrame();
+    emit spriteUpdated();
+}
+
+//TODO: Finish the handler method
+void MainWindow::on_eraserButton_clicked(){
+    ui->eraserButton->isEnabled();
+}
+
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);
 //     ui->duplicateFrameButton->setEnabled(true);
