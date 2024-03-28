@@ -4,8 +4,9 @@
 #include "DrawingCanvas.h"
 #include <QColorDialog>
 #include <QColor>
+#include "spriteModel.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(SpriteModel& spriteEditor, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -96,9 +97,9 @@ void MainWindow::onAddFrameButtonClicked() {
 //     emit on_duplicateFrameButtonClicked_Signal();
 //     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;
 // }
-// void MainWindow::on_colorPicker_clicked(){
 
-//     QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
-//     emit colorSelected(selectedColor);
-//     std::cout <<"Color selected and signal sent" << std::endl;
-// }
+void MainWindow::on_colorPicker_clicked(){
+
+     QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
+     emit colorSelected(selectedColor);
+ }

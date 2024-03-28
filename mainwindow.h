@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include "drawingcanvas.h"
+#include "spriteModel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,7 +17,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(SpriteModel& spriteEditor, QWidget *parent = nullptr);
     ~MainWindow();
 
 signals:
@@ -46,7 +47,7 @@ private slots:
     // void on_actionSave_clicked();
     // void on_playSpriteButton_clicked();
     // void on_duplicateFrameButton_clicked();
-    // void on_colorPicker_clicked();
+     void on_colorPicker_clicked();
 
     void onAddFrameButtonClicked();
     void updateFrameList();
