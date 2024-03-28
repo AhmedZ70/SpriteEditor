@@ -36,7 +36,6 @@ signals:
     void spriteUpdated();
 
 
-
 private slots:
     // void StartProgram();
     // void on_pencilButton_clicked();
@@ -47,9 +46,10 @@ private slots:
     // void on_actionSave_clicked();
     // void on_playSpriteButton_clicked();
     // void on_duplicateFrameButton_clicked();
-     void on_colorPicker_clicked();
-
+    void on_colorPicker_clicked();
     void onAddFrameButtonClicked();
+    void on_deleteFrameButton_clicked();
+    void on_eraserButton_clicked();
     void updateFrameList();
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
 

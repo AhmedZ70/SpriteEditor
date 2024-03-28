@@ -59,6 +59,8 @@ public:
     /// @brief Adds a new frame to the sprite.
     void addNewFrame();
 
+    void deleteFrame();
+
 protected:
 
     /// @brief Overridden paint event handler to draw the canvas content.
