@@ -20,6 +20,7 @@ public:
     int getCurrentFrameIndex() const;
     void setCurrentFrameIndex(size_t index);
     void drawPixel(const QPoint& position, const QColor& color);
+    Frame & getCurrentFrame(int index);
 
 signals:
     // Signals to notify changes in the sprite

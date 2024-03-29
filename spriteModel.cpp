@@ -17,12 +17,12 @@ void SpriteModel::deleteFrame(){
 }
 
 void SpriteModel::duplicateFrame() {
-    sprite.duplicateFrame();
+    Frame dubFrame = sprite.getCurrentFrame(currentFrameIndex);
+    sprite.insertFrame(currentFrameIndex, dubFrame);
     emit spriteChanged();
 }
-
 void SpriteModel::setCurrentFrameIndex(size_t index) {
-    if (index >= 0 && index < sprite.frameCount()) {
+    if (index < sprite.frameCount()) {
         currentFrameIndex = index;
     }
     emit spriteChanged();
@@ -34,7 +34,7 @@ int SpriteModel::getCurrentFrameIndex() const {
 
 
 QImage SpriteModel::getCurrentFrameImage(size_t index) {
-    if (index >= 0 && index < sprite.frameCount()) {
+    if (index < sprite.frameCount()) {
         return sprite.getFrame(index).getImage();
     }
     return QImage();

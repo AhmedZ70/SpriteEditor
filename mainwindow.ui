@@ -124,17 +124,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Frame #</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="frameSelectorSpinBox">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>530</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="fpsLabel">

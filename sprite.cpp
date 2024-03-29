@@ -20,6 +20,14 @@ void Sprite::addFrame(const Frame &frame)
     currentFrame++;
 }
 
+void Sprite::insertFrame(size_t index, const Frame& frame){
+    if (index <= frames.size()) {
+        frames.insert(frames.begin() + index, frame);
+    } else {
+        frames.push_back(frame);
+    }
+}
+
 void Sprite::removeFrame(size_t index) {
     if (index < frames.size()) {
         frames.erase(frames.begin() + index);
@@ -41,7 +49,9 @@ void Sprite::duplicateFrame()
         frames.push_back(duplicatedFrame);
     }
 }
-
+Frame & Sprite::getCurrentFrame(int index) {
+    return frames.at(index);
+}
 void Sprite:: removeFrame()
 {
     frames.erase(frames.begin() + currentFrame);
