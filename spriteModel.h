@@ -94,7 +94,7 @@ public slots:
          /// @brief Loads a sprite from a .ssp file.
          /// @param const QString& fileName The name of the file to load the sprite from
          /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
-         static Sprite load(const QString& fileName);
+         void load(const QString& fileName);
 
 };
 
