@@ -8,6 +8,21 @@ DrawingCanvas::DrawingCanvas(QWidget *parent)
 void DrawingCanvas::paintEvent(QPaintEvent *) {
     emit requestCurrentImage();
     QPainter painter(this);
+
+    // Draw checkerboard pattern
+    int tileSize = 10;
+    QColor color1(220, 220, 220); // Light gray
+    QColor color2(255, 255, 255); // White
+    QRect background = this->rect();
+
+    for (int y = 0; y < background.height(); y += tileSize) {
+        for (int x = 0; x < background.width(); x += tileSize) {
+            QRect tileRect(x, y, tileSize, tileSize);
+            QColor tileColor = ((x / tileSize) % 2 == (y / tileSize) % 2) ? color1 : color2;
+            painter.fillRect(tileRect, tileColor);
+        }
+    }
+
     if (!currentImage.isNull()) {
         painter.drawImage(rect(), currentImage);
     }

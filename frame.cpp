@@ -9,7 +9,7 @@
 
 // Constructor definition
 Frame::Frame(int width, int height) : image(width, height, QImage::Format_ARGB32) {
-    image.fill(Qt::white);
+    image.fill(Qt::transparent);
 }
 
 // getImage definition

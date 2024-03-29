@@ -77,7 +77,7 @@ void MainWindow::onDeleteFrameButtonClicked()
 void MainWindow::onEraserButtonClicked(){
     ui->eraserButton->setEnabled(false);
     ui->pencilButton->setEnabled(true);
-    emit colorSelected(QColor(Qt::white));
+    emit colorSelected(QColor(Qt::transparent));
 }
 
 void MainWindow::onPencilButtonClicked(){
