@@ -68,6 +68,7 @@ public:
     /// @param QPoint position where the pixel will be drawn
     /// @param QColor color of the pixel to be drawn
     void drawPixel(const QPoint& position, const QColor& color);
+    Frame & getCurrentFrame(int index);
 
     /// @brief Saves the sprite to a file with a .ssp extension.
     /// @param const QString& fileName The name of the file to save the sprite to

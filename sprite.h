@@ -64,6 +64,11 @@ public:
     /// @brief Removes the current frame from the list and goes to the previous frame, if none creates new empty frame.
     void removeFrame();
 
+    Frame& getCurrentFrame(int index);
+
+    /// @brief Duplicates the current frame as a new next frame.
+    void insertFrame(size_t index, const Frame& frame);
+
     /// @brief Serializes the sprite to a Json object.
     /// @return QJsonObject the serialized Json object
     QJsonObject toJson() const;
