@@ -17,25 +17,24 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(SpriteModel& spriteEditor, QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 signals:
-    void on_Pencil_Clicked_Signal();
-    void on_Eraser_Clicked_Signal();
-    void on_Color_Clicked_Signal();
-    void on_NewFrame_ClickedSignal();
-    void on_FPS_Clicked_Signal();
-    void on_SetSize_Clicked_Signal();
-    void on_Open_Clicked_Signal();
-    void on_Save_Signal();
-    void on_PlayBack_Signal();
-    void on_addFrameButton_Signal();
-    void on_duplicateFrameButtonClicked_Signal();
+    // void on_Pencil_Clicked_Signal();
+    // void on_Eraser_Clicked_Signal();
+    // void on_Color_Clicked_Signal();
+    // void on_NewFrame_ClickedSignal();
+    // void on_FPS_Clicked_Signal();
+    // void on_SetSize_Clicked_Signal();
+    // void on_Open_Clicked_Signal();
+    // void on_Save_Signal();
+    // void on_PlayBack_Signal();
+    // void on_addFrameButton_Signal();
+    // void on_duplicateFrameButtonClicked_Signal();
+
     void colorSelected(QColor selectedColor);
     void spriteUpdated();
-    void on_eraserButton_clicked_signal();
-    void on_pencilButton_clicked_signal();
 
 
 private slots:
@@ -48,19 +47,22 @@ private slots:
     // void on_actionSave_clicked();
     // void on_playSpriteButton_clicked();
     // void on_duplicateFrameButton_clicked();
-    void on_colorPicker_clicked();
+
+
     void onAddFrameButtonClicked();
-    void on_deleteFrameButton_clicked();
-    void on_eraserButton_clicked();
-    void on_pencilButton_clicked();
+    void onDeleteFrameButtonClicked();
+    void onEraserButtonClicked();
+    void onPencilButtonClicked();
+    void onDuplicateFrameButtonClicked();
+    void onColorPickerClicked();
     void updateFrameList();
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
-   // void on_duplicateFrameButton_clicked();
-
+    void provideCurrentImage();
 
 private:
     Ui::MainWindow *ui;
     DrawingCanvas *canvas;
+    SpriteModel *spriteEditor;
     QColor lastUsedColor;
 
 };

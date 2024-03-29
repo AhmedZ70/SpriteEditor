@@ -3,7 +3,9 @@
 #include <QPainter>
 #include "sprite.h"
 
-Sprite:: Sprite(int width, int height): width(width), height(height){}
+Sprite:: Sprite(int width, int height): width(width), height(height){
+    currentFrame = 0;
+}
 
 void Sprite::addFrame()
 {
@@ -34,8 +36,10 @@ size_t Sprite::frameCount() const {
 
 void Sprite::duplicateFrame()
 {
-    Frame duplicatedFrame = frames.at(currentFrame);
-    frames.push_back(duplicatedFrame);
+    if(currentFrame >= 0 && currentFrame < (int)frames.size()) {
+        Frame duplicatedFrame = frames.at(currentFrame);
+        frames.push_back(duplicatedFrame);
+    }
 }
 
 void Sprite:: removeFrame()

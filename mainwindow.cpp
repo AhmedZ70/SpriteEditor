@@ -1,24 +1,37 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 //#include <iostream>
-#include "DrawingCanvas.h"
 #include <QColorDialog>
 #include <QColor>
 #include "spriteModel.h"
 
-MainWindow::MainWindow(SpriteModel& spriteEditor, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    spriteEditor = new SpriteModel(this);
     canvas = new DrawingCanvas(this);
+
     canvas->setGeometry(ui->drawPanel->geometry());
     delete ui->drawPanel;
     ui->drawPanel = canvas;
+
+    connect(canvas, &DrawingCanvas::requestPixelChange, spriteEditor, &SpriteModel::updatePixel);
+    connect(spriteEditor, &SpriteModel::spriteChanged, canvas, &DrawingCanvas::updateDrawing);
+    connect(canvas, &DrawingCanvas::requestCurrentImage, this, &MainWindow::provideCurrentImage);
+
     connect(ui->addFrameButton, &QPushButton::clicked, this, &MainWindow::onAddFrameButtonClicked);
+    connect(ui->deleteFrameButton, &QPushButton::clicked, this, &MainWindow::onDeleteFrameButtonClicked);
+    connect(ui->eraserButton, &QPushButton::clicked, this, &MainWindow::onEraserButtonClicked);
+    connect(ui->pencilButton, &QPushButton::clicked, this, &MainWindow::onPencilButtonClicked);
+    connect(ui->duplicateFrameButton, &QPushButton::clicked, this, &MainWindow::onDuplicateFrameButtonClicked);
+    connect(ui->colorPicker, &QPushButton::clicked, this, &MainWindow::onColorPickerClicked);
+
     connect(this, &MainWindow::spriteUpdated, this, &MainWindow::updateFrameList);
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
     connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
+
 
 }
 
@@ -28,54 +41,65 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::updateFrameList() {
-    ui->framesList->clear(); // Clear the existing items
-    for (int i = 0; i < canvas->getFrameCount(); ++i) {
-        QImage thumbnail = canvas->getFrameThumbnail(i);
+    ui->framesList->clear();
+    for (int i = 0; i < spriteEditor->getFrameCount(); ++i) {
+        QImage thumbnail = spriteEditor->getFrameThumbnail(i);
 
         QListWidgetItem *item = new QListWidgetItem;
         item->setIcon(QIcon(QPixmap::fromImage(thumbnail)));
-        item->setData(Qt::UserRole, QVariant::fromValue(i)); // Store the frame index
+        item->setData(Qt::UserRole, QVariant::fromValue(i));
         ui->framesList->addItem(item);
     }
 }
 
+void MainWindow::provideCurrentImage() {
+    QImage image = spriteEditor->getCurrentFrameImage(spriteEditor->getCurrentFrameIndex());
+    canvas->receiveCurrentImage(image.scaled(canvas->size(), Qt::KeepAspectRatio, Qt::FastTransformation));
+}
+
 void MainWindow::OnFrameListWidgetItemClicked(QListWidgetItem *item) {
     int frameIndex = item->data(Qt::UserRole).toInt();
-    canvas->setCurrentFrameIndex(frameIndex);
+    spriteEditor->setCurrentFrameIndex(frameIndex);
+    emit spriteUpdated();
 }
 
 void MainWindow::onAddFrameButtonClicked() {
-    canvas->addNewFrame();
-    emit spriteUpdated();
-}
-void MainWindow::on_deleteFrameButton_clicked()
-{
-    canvas->deleteFrame();
+    spriteEditor->addFrame();
     emit spriteUpdated();
 }
 
-void MainWindow::on_eraserButton_clicked(){
+void MainWindow::onDeleteFrameButtonClicked()
+{
+    spriteEditor->deleteFrame();
+    emit spriteUpdated();
+}
+
+void MainWindow::onEraserButtonClicked(){
     ui->eraserButton->setEnabled(false);
     ui->pencilButton->setEnabled(true);
-    emit on_eraserButton_clicked_signal();
     emit colorSelected(QColor(Qt::white));
 }
 
-void MainWindow::on_pencilButton_clicked(){
+void MainWindow::onPencilButtonClicked(){
     ui->pencilButton->setEnabled(false);
     ui->eraserButton->setEnabled(true);
-    emit on_pencilButton_clicked_signal();
     if(lastUsedColor==""){
         lastUsedColor = QColor(Qt::red);
     }
     emit colorSelected(QColor(lastUsedColor));
 }
 
-// void MainWindow::on_duplicateFrameButton_clicked(){
-//     canvas->addNewFrame();
-//     emit spriteUpdated();
-// }
+void MainWindow::onDuplicateFrameButtonClicked(){
+    spriteEditor->duplicateFrame();
+    emit spriteUpdated();
+}
 
+void MainWindow::onColorPickerClicked(){
+
+    QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
+    lastUsedColor = selectedColor;
+    emit colorSelected(selectedColor);
+}
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);
 //     ui->duplicateFrameButton->setEnabled(true);
@@ -128,9 +152,4 @@ void MainWindow::on_pencilButton_clicked(){
 //     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;
 // }
 
-void MainWindow::on_colorPicker_clicked(){
 
-     QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
-     lastUsedColor = selectedColor;
-     emit colorSelected(selectedColor);
- }

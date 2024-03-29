@@ -29,7 +29,7 @@ QJsonObject Frame::toJson() const {
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     buffer.open(QIODevice::WriteOnly);
-    this->image.save(&buffer, "PNG"); // PNG for lossless compression
+    this->image.save(&buffer, "PNG");
 
     // Convert QByteArray to base64 string and store in JSON
     json["image"] = QString::fromUtf8(byteArray.toBase64());
@@ -48,7 +48,7 @@ Frame Frame::fromJson(const QJsonObject& json) {
     image.loadFromData(byteArray, "PNG");
 
     Frame frame(image.width(), image.height());
-    frame.image = image; // Assuming you add a way to set `image` directly or through the constructor
+    frame.image = image;
 
     return frame;
 }
