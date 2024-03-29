@@ -178,14 +178,14 @@ void MainWindow::showEvent(QShowEvent *event) {
 
 void MainWindow:: onSaveClicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Load Sprite"), "", tr("JSON Files (*.json)"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Load Sprite"), "", tr("SSP Files (*.ssp)"));
     if (!fileName.isEmpty()) {
         emit Save(fileName);
     }
 }
 void MainWindow:: onLoadClicked()
 {
-        QString fileName = QFileDialog::getOpenFileName(this, tr("Load Sprite"), "", tr("JSON Files (*.json)"));
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Load Sprite"), "", tr("SSP Files (*.ssp)"));
         if (!fileName.isEmpty()) {
             emit Load(fileName);
         }
