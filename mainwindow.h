@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include <QListWidget>
+#include <QString>
 #include "drawingcanvas.h"
 #include "spriteModel.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -36,6 +38,8 @@ signals:
     void colorSelected(QColor selectedColor);
     void spriteUpdated();
     void dimensionsSet(int width, int height);
+    void Save(QString fileName);
+    void Load(QString fileName);
 
 
 private slots:
@@ -58,6 +62,8 @@ private slots:
     void updateFrameList();
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
     void provideCurrentImage();
+    void onSaveClicked();
+    void onLoadClicked();
 
 private:
     Ui::MainWindow *ui;

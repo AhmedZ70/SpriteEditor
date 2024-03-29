@@ -7,9 +7,11 @@
 #include <QInputDialog>
 #include "dimensionsdialog.h"
 #include <QTimer>
+#include <QFileDialog>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
     spriteEditor = new SpriteModel(this);
@@ -37,8 +39,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
     connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
     connect(this, &MainWindow::dimensionsSet, spriteEditor, &SpriteModel::setInitialFrame);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::onSaveClicked);
+    connect(ui->actionLoad, &QAction::triggered, this, &MainWindow::onLoadClicked);
+    connect(this, &MainWindow::Load, spriteEditor, &SpriteModel::load);
+    connect(this, &MainWindow::Save, spriteEditor, &SpriteModel::save);
 
     connect(ui->playSpriteButton, &QPushButton::clicked, spriteEditor, &SpriteModel::playAnimation);
+    connect(spriteEditor, &SpriteModel::loaded, this, &MainWindow::updateFrameList);
+
 }
 
 MainWindow::~MainWindow()
@@ -178,3 +186,19 @@ void MainWindow::showEvent(QShowEvent *event) {
 
 
 }
+
+void MainWindow:: onSaveClicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Load Sprite"), "", tr("SSP Files (*.ssp)"));
+    if (!fileName.isEmpty()) {
+        emit Save(fileName);
+    }
+}
+void MainWindow:: onLoadClicked()
+{
+        QString fileName = QFileDialog::getOpenFileName(this, tr("Load Sprite"), "", tr("SSP Files (*.ssp)"));
+        if (!fileName.isEmpty()) {
+            emit Load(fileName);
+        }
+  }
+

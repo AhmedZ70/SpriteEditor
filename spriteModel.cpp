@@ -95,19 +95,20 @@ bool SpriteModel::save(const QString& fileName) const {
     return true;
 }
 
-Sprite SpriteModel::load(const QString& fileName) {
+void SpriteModel::load(const QString& fileName) {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Could not open file for reading:" << fileName;
         throw std::runtime_error("File cannot be opened.");
     }
-
     QByteArray rawData = file.readAll();
     QJsonDocument doc(QJsonDocument::fromJson(rawData));
     QJsonObject jsonObj = doc.object();
 
-    Sprite sprite = Sprite::fromJson(jsonObj);
-    return sprite;
+    Sprite newSprite = Sprite::fromJson(jsonObj);
+    sprite = newSprite;
+    emit spriteChanged();
+    emit loaded();
 }
 
 void SpriteModel::playAnimation() {
