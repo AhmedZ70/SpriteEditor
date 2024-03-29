@@ -2,8 +2,15 @@
 #define SPRITEMODEL_H
 
 #include <QObject>
-#include "sprite.h"
+#include <QWidget>
+#include <QDialog>
+#include <QLabel>
+#include <QTimer>
 
+#include <QVBoxLayout>
+
+#include "sprite.h"
+#include "playSprite.h"
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -29,9 +36,19 @@ private:
     // Height of the frames of the sprite instance
     int spriteHeight;
 
+    std::vector<Frame> allFrames; // Consider storing frames as a member if they don't change often
+    int currentPlaybackFrameIndex = 0; // Tracks the current frame index for playback
+    QTimer* playbackTimer = nullptr; // Manages the playback timing
+    QDialog* playbackPopup = nullptr;
+    // PlaySprite * spritePlayer;
+
 public:
     /// @brief Constructor for sprite model
     explicit SpriteModel(QObject *parent = nullptr);
+
+    void playAnimation();
+
+    // ~SpriteModel();
 
     /// @brief Adds a frame to the the sprite (wrapper).
     void addFrame();
@@ -75,10 +92,14 @@ public:
     /// @return bool True if the save was successful, false otherwise
     bool save(const QString& fileName) const;
 
+    void setPlaySpriteMembers();
+
     /// @brief Loads a sprite from a .ssp file.
     /// @param const QString& fileName The name of the file to load the sprite from
     /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
     static Sprite load(const QString& fileName);
+
+    std::vector<Frame> getAllFrames();
 
 signals:
     /// @brief Signal that notifies that the sprite pixels have been changed.
@@ -92,7 +113,10 @@ signals:
 
 public slots:
          void updatePixel(const QPoint& position, const QColor& color, int width, int height);
+
          void setInitialFrame(int width, int height);
+         // void Playsprite();
+         // QDialog* PopUpWindow();
 };
 
 #endif // SPRITEMODEL_H

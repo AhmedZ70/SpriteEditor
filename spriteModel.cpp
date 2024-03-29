@@ -9,12 +9,22 @@ void SpriteModel::addFrame() {
     sprite.addFrame(Frame(spriteWidth, spriteHeight));
     setCurrentFrameIndex(getFrameCount() - 1);
     emit spriteChanged();
+    // setPlaySpriteMembers();
+
 }
 
-void SpriteModel::deleteFrame(){
+void SpriteModel::deleteFrame() {
     sprite.removeFrame(currentFrameIndex);
     currentFrameIndex = sprite.frameCount()-1;
     emit spriteChanged();
+}
+
+// void SpriteModel::setPlaySpriteMembers(){
+//     spritePlayer->setFramesAndFPS(getAllFrames(), 69);
+// }
+
+std::vector<Frame> SpriteModel::getAllFrames() {
+    return sprite.returnFrames();
 }
 
 void SpriteModel::duplicateFrame() {
@@ -40,6 +50,10 @@ QImage SpriteModel::getCurrentFrameImage(size_t index) {
     }
     return QImage();
 }
+
+// void SpriteModel::playFrames(){
+//     spritePlayer->Play();
+// }
 
 void SpriteModel::updatePixel(const QPoint& canvasPoint, const QColor& color, int width, int height) {
     QPoint scaledPosition(canvasPoint.x() * getCurrentFrameImage(currentFrameIndex).width() / width, canvasPoint.y() * getCurrentFrameImage(currentFrameIndex).height() / height);
@@ -95,3 +109,51 @@ Sprite SpriteModel::load(const QString& fileName) {
     Sprite sprite = Sprite::fromJson(jsonObj);
     return sprite;
 }
+
+void SpriteModel::playAnimation() {
+    if (!playbackPopup) {
+        playbackPopup = new QDialog();
+        playbackPopup->setWindowTitle("Preview");
+        allFrames = getAllFrames();
+        QVBoxLayout* layout = new QVBoxLayout(playbackPopup);
+
+        QLabel* imageLabel = new QLabel(playbackPopup);
+        layout->addWidget(imageLabel);
+
+        playbackPopup->setLayout(layout);
+        playbackPopup->setAttribute(Qt::WA_DeleteOnClose);
+
+        playbackTimer = new QTimer(playbackPopup);
+        connect(playbackTimer, &QTimer::timeout, this, [this, imageLabel]() {
+            if (currentPlaybackFrameIndex < allFrames.size()) {
+                QImage img = allFrames[currentPlaybackFrameIndex++].getImage();
+                if (!img.isNull()) {
+                    // Scale the image to a new size
+                    QSize newSize(800, 600); // Example new size, adjust as needed
+                    img = img.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    imageLabel->setPixmap(QPixmap::fromImage(img));
+                } else {
+                    qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
+                }
+                if (currentPlaybackFrameIndex >= allFrames.size()) {
+                    currentPlaybackFrameIndex = 0; // Loop back to the first frame
+                }
+            }
+        });
+        // Ensure the dialog and timer are cleaned up properly
+        connect(playbackPopup, &QDialog::destroyed, [this]() {
+            playbackTimer->stop(); // Stop the timer to prevent further ticks
+            playbackTimer = nullptr; // Reset the timer pointer
+            playbackPopup = nullptr; // Reset the popup pointer
+        });
+
+        playbackTimer->start(1000 / 2); // Adjust fps as needed
+    }
+
+    if (playbackPopup && !playbackPopup->isVisible()) {
+        playbackPopup->show();
+    }
+}
+
+
+

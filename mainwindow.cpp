@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     spriteEditor = new SpriteModel(this);
     canvas = new DrawingCanvas(this);
 
+
     canvas->setGeometry(ui->drawPanel->geometry());
     delete ui->drawPanel;
     ui->drawPanel = canvas;
@@ -30,12 +31,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->duplicateFrameButton, &QPushButton::clicked, this, &MainWindow::onDuplicateFrameButtonClicked);
     connect(ui->colorPicker, &QPushButton::clicked, this, &MainWindow::onColorPickerClicked);
 
+    //connect(this, &MainWindow::spriteUpdated, spriteEditor, &SpriteModel::setPlaySpriteMembers);
+
     connect(this, &MainWindow::spriteUpdated, this, &MainWindow::updateFrameList);
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
     connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
     connect(this, &MainWindow::dimensionsSet, spriteEditor, &SpriteModel::setInitialFrame);
 
-
+    connect(ui->playSpriteButton, &QPushButton::clicked, spriteEditor, &SpriteModel::playAnimation);
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +60,10 @@ void MainWindow::updateFrameList() {
 
 void MainWindow::provideCurrentImage() {
     QImage image = spriteEditor->getCurrentFrameImage(spriteEditor->getCurrentFrameIndex());
+    if (image.isNull()) {
+        qDebug() << "Current frame image is null";
+        return;
+    }
     canvas->receiveCurrentImage(image.scaled(canvas->size(), Qt::KeepAspectRatio, Qt::FastTransformation));
 }
 
@@ -103,6 +110,11 @@ void MainWindow::onColorPickerClicked(){
     lastUsedColor = selectedColor;
     emit colorSelected(selectedColor);
 }
+
+void MainWindow::on_playSpriteButton_clicked(){
+    emit playSpriteClicked();
+}
+
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);
 //     ui->duplicateFrameButton->setEnabled(true);
@@ -146,10 +158,6 @@ void MainWindow::onColorPickerClicked(){
 //     std::cout << "OnSave Clicked signal sent" << std::endl;
 // }
 
-// void MainWindow::on_playSpriteButton_clicked(){
-//     emit on_PlayBack_Signal();
-//     std::cout << "OnPlayBack Clicked signal sent" << std::endl;
-// }
 // void MainWindow::on_duplicateFrameButton_clicked(){
 //     emit on_duplicateFrameButtonClicked_Signal();
 //     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;

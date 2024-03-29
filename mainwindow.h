@@ -29,7 +29,7 @@ signals:
     // void on_SetSize_Clicked_Signal();
     // void on_Open_Clicked_Signal();
     // void on_Save_Signal();
-    // void on_PlayBack_Signal();
+    void playSpriteClicked();
     // void on_addFrameButton_Signal();
     // void on_duplicateFrameButtonClicked_Signal();
 
@@ -46,10 +46,9 @@ private slots:
     // void on_SetSize_clicked();
     // void on_actionLoad_clicked();
     // void on_actionSave_clicked();
-    // void on_playSpriteButton_clicked();
     // void on_duplicateFrameButton_clicked();
 
-
+    void on_playSpriteButton_clicked();
     void onAddFrameButtonClicked();
     void onDeleteFrameButtonClicked();
     void onEraserButtonClicked();
@@ -65,6 +64,7 @@ private:
     DrawingCanvas *canvas;
     SpriteModel *spriteEditor;
     QColor lastUsedColor;
+    // PlaySprite *playSpriteInstance;
 
 protected:
     void showEvent(QShowEvent *event) override;

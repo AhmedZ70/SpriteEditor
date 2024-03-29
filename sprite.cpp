@@ -20,6 +20,10 @@ void Sprite::addFrame(const Frame &frame)
     currentFrame++;
 }
 
+std::vector<Frame> Sprite::returnFrames() {
+    return frames;
+}
+
 void Sprite::insertFrame(size_t index, const Frame& frame){
     if (index <= frames.size()) {
         frames.insert(frames.begin() + index, frame);

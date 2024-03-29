@@ -77,6 +77,8 @@ public:
     /// @param QJsonObject to deserialize
     /// @return Sprite object after being deserialized
     static Sprite fromJson(const QJsonObject& json);
+
+    std::vector<Frame> returnFrames();
 };
 
 //SPRITE_H
