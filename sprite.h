@@ -10,7 +10,7 @@
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name sprite h file for assignment7
+ * @name sprite h file for assignment8
  * This h file contains the outlined methods for use within a sprite.
  * A sprite is essentially a collection of frames that can be animated.
 */

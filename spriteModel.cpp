@@ -1,7 +1,8 @@
 #include "spriteModel.h"
+#include <QFile>
+#include <QDebug>
 
 SpriteModel::SpriteModel(QObject *parent) : QObject(parent), sprite(),  currentFrameIndex(0) {
-
 }
 
 void SpriteModel::addFrame() {
@@ -64,5 +65,33 @@ void SpriteModel::setInitialFrame(int width, int height)
     spriteWidth = width;
     spriteHeight = height;
     sprite.addFrame(Frame(spriteWidth, spriteHeight));
+}
 
+bool SpriteModel::save(const QString& fileName) const {
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Could not open file for writing:" << fileName;
+        return false;
+    }
+
+    QJsonObject jsonObj = sprite.toJson();
+    QJsonDocument doc(jsonObj);
+    file.write(doc.toJson());
+    file.close();
+    return true;
+}
+
+Sprite SpriteModel::load(const QString& fileName) {
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Could not open file for reading:" << fileName;
+        throw std::runtime_error("File cannot be opened.");
+    }
+
+    QByteArray rawData = file.readAll();
+    QJsonDocument doc(QJsonDocument::fromJson(rawData));
+    QJsonObject jsonObj = doc.object();
+
+    Sprite sprite = Sprite::fromJson(jsonObj);
+    return sprite;
 }
