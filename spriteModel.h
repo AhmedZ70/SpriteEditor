@@ -29,10 +29,13 @@ signals:
 
 public slots:
          void updatePixel(const QPoint& position, const QColor& color, int width, int height);
+         void setInitialFrame(int width, int height);
 
 private:
     Sprite sprite; // The Sprite object that holds the frame data
     int currentFrameIndex;
+    int spriteWidth;
+    int spriteHeight;
 
 
 };

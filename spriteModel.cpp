@@ -1,12 +1,11 @@
 #include "spriteModel.h"
 
 SpriteModel::SpriteModel(QObject *parent) : QObject(parent), sprite(),  currentFrameIndex(0) {
-    sprite.addFrame(Frame(32, 32));
 
 }
 
 void SpriteModel::addFrame() {
-    sprite.addFrame(Frame(32, 32));
+    sprite.addFrame(Frame(spriteWidth, spriteHeight));
     setCurrentFrameIndex(getFrameCount() - 1);
     emit spriteChanged();
 }
@@ -59,4 +58,11 @@ QImage SpriteModel::getFrameThumbnail(size_t index) {
         return sprite.getFrame(index).getImage().scaled(64, 64, Qt::KeepAspectRatio, Qt::FastTransformation);
     }
     return QImage();
+}
+void SpriteModel::setInitialFrame(int width, int height)
+{
+    spriteWidth = width;
+    spriteHeight = height;
+    sprite.addFrame(Frame(spriteWidth, spriteHeight));
+
 }

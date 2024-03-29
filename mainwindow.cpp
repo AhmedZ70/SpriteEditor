@@ -4,7 +4,9 @@
 #include <QColorDialog>
 #include <QColor>
 #include "spriteModel.h"
-
+#include <QInputDialog>
+#include "dimensionsdialog.h"
+#include <QTimer>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -31,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::spriteUpdated, this, &MainWindow::updateFrameList);
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
     connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
+    connect(this, &MainWindow::dimensionsSet, spriteEditor, &SpriteModel::setInitialFrame);
 
 
 }
@@ -153,3 +156,17 @@ void MainWindow::onColorPickerClicked(){
 // }
 
 
+void MainWindow::showEvent(QShowEvent *event) {
+    QMainWindow::showEvent(event);
+        // Use QTimer::singleShot to defer showing the dialog
+        QTimer::singleShot(0, this, [this]() {
+            dimensionsDialog dialog(this);
+            if (dialog.exec() == QDialog::Accepted) {
+                int width = dialog.getWidth();
+                int height = dialog.getHeight();
+                emit dimensionsSet(width, height);
+            }
+        });
+
+
+}

@@ -35,6 +35,7 @@ signals:
 
     void colorSelected(QColor selectedColor);
     void spriteUpdated();
+    void dimensionsSet(int width, int height);
 
 
 private slots:
@@ -64,6 +65,9 @@ private:
     DrawingCanvas *canvas;
     SpriteModel *spriteEditor;
     QColor lastUsedColor;
+
+protected:
+    void showEvent(QShowEvent *event) override;
 
 };
 #endif // MAINWINDOW_H
