@@ -41,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::Load, spriteEditor, &SpriteModel::load);
     connect(this, &MainWindow::Save, spriteEditor, &SpriteModel::save);
 
+    connect(spriteEditor, &SpriteModel::loaded, this, &MainWindow::updateFrameList);
+
 }
 
 MainWindow::~MainWindow()

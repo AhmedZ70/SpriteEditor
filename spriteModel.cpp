@@ -87,7 +87,6 @@ void SpriteModel::load(const QString& fileName) {
         qDebug() << "Could not open file for reading:" << fileName;
         throw std::runtime_error("File cannot be opened.");
     }
-
     QByteArray rawData = file.readAll();
     QJsonDocument doc(QJsonDocument::fromJson(rawData));
     QJsonObject jsonObj = doc.object();
@@ -95,4 +94,5 @@ void SpriteModel::load(const QString& fileName) {
     Sprite newSprite = Sprite::fromJson(jsonObj);
     sprite = newSprite;
     emit spriteChanged();
+    emit loaded();
 }

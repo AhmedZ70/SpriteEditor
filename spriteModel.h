@@ -82,6 +82,8 @@ signals:
     /// @brief Signal that notifies that a frame has been duplicated in the sprite instance.
     void frameDuplicated();
 
+    void loaded();
+
 public slots:
          void updatePixel(const QPoint& position, const QColor& color, int width, int height);
          void setInitialFrame(int width, int height);
