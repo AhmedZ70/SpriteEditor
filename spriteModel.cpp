@@ -130,8 +130,8 @@ void SpriteModel::playAnimation() {
                 QImage img = allFrames[currentPlaybackFrameIndex++].getImage();
                 if (!img.isNull()) {
                     // Scale the image to a new size
-                    QSize newSize(800, 600); // Example new size, adjust as needed
-                    img = img.scaled(newSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    QSize newSize(600, 600); // Example new size, adjust as needed
+                    img = img.scaled(newSize, Qt::KeepAspectRatio, Qt::FastTransformation);
                     imageLabel->setPixmap(QPixmap::fromImage(img));
                 } else {
                     qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
