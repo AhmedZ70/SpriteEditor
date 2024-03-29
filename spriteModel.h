@@ -70,15 +70,7 @@ public:
     void drawPixel(const QPoint& position, const QColor& color);
     Frame & getCurrentFrame(int index);
 
-    /// @brief Saves the sprite to a file with a .ssp extension.
-    /// @param const QString& fileName The name of the file to save the sprite to
-    /// @return bool True if the save was successful, false otherwise
-    bool save(const QString& fileName) const;
 
-    /// @brief Loads a sprite from a .ssp file.
-    /// @param const QString& fileName The name of the file to load the sprite from
-    /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
-    static Sprite load(const QString& fileName);
 
 signals:
     /// @brief Signal that notifies that the sprite pixels have been changed.
@@ -93,6 +85,17 @@ signals:
 public slots:
          void updatePixel(const QPoint& position, const QColor& color, int width, int height);
          void setInitialFrame(int width, int height);
+
+         /// @brief Saves the sprite to a file with a .ssp extension.
+         /// @param const QString& fileName The name of the file to save the sprite to
+         /// @return bool True if the save was successful, false otherwise
+         bool save(const QString& fileName) const;
+
+         /// @brief Loads a sprite from a .ssp file.
+         /// @param const QString& fileName The name of the file to load the sprite from
+         /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
+         static Sprite load(const QString& fileName);
+
 };
 
 #endif // SPRITEMODEL_H
