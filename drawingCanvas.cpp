@@ -54,5 +54,27 @@ void DrawingCanvas::colorChanged(QColor newColor) {
     currentColor = newColor;
 }
 
+void DrawingCanvas::enterDrawingMode() {
+
+    QPixmap cursorPixmap(":/icons/penMouse.png"); // Adjust the path to your icon
+    QPixmap scaledCursorPixmap = cursorPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    // Create the custom cursor
+    QCursor drawingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() ); // -1, -1 for using the default hot spot
+
+    // Set the custom cursor for the DrawingCanvas
+    setCursor(drawingCursor);
+}
+
+void DrawingCanvas::erasingMode() {
+
+    QPixmap cursorPixmap(":/icons/eraser.png"); // Adjust the path to your icon
+    QPixmap scaledCursorPixmap = cursorPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    // Create the custom cursor
+    QCursor erasingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() ); // -1, -1 for using the default hot spot
+
+    // Set the custom cursor for the DrawingCanvas
+    setCursor(erasingCursor);
+}
+
 
 

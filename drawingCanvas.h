@@ -31,6 +31,8 @@ public slots:
     void colorChanged(QColor newColor);
     void updateDrawing();
     void receiveCurrentImage(const QImage& image);
+    void enterDrawingMode();
+    void erasingMode();
 };
 
 #endif // DRAWINGCANVAS_H

@@ -40,6 +40,8 @@ signals:
     void dimensionsSet(int width, int height);
     void Save(QString fileName);
     void Load(QString fileName);
+    void Drawing();
+    void Erasing();
 
 
 private slots:

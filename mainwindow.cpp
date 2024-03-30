@@ -44,8 +44,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::Load, spriteEditor, &SpriteModel::load);
     connect(this, &MainWindow::Save, spriteEditor, &SpriteModel::save);
 
+
     connect(ui->playSpriteButton, &QPushButton::clicked, spriteEditor, &SpriteModel::playAnimation);
+
     connect(spriteEditor, &SpriteModel::loaded, this, &MainWindow::updateFrameList);
+    connect(this, &MainWindow::Drawing, canvas,&DrawingCanvas::enterDrawingMode);
+    connect(this, &MainWindow::Erasing, canvas,&DrawingCanvas::erasingMode);
+
+
+    ui-> pencilButton->setIcon(QIcon(":/icons/penIcon.png"));
+    ui-> eraserButton->setIcon(QIcon(":/icons/eraserIcon.png"));
 
 }
 
@@ -96,6 +104,7 @@ void MainWindow::onEraserButtonClicked(){
     ui->eraserButton->setEnabled(false);
     ui->pencilButton->setEnabled(true);
     emit colorSelected(QColor(Qt::transparent));
+    emit Erasing();
 }
 
 void MainWindow::onPencilButtonClicked(){
@@ -105,6 +114,7 @@ void MainWindow::onPencilButtonClicked(){
         lastUsedColor = QColor(Qt::red);
     }
     emit colorSelected(QColor(lastUsedColor));
+    emit Drawing();
 }
 
 void MainWindow::onDuplicateFrameButtonClicked(){
