@@ -30,6 +30,9 @@ private:
     // Current frame of the sprite instance
     int currentFrameIndex;
 
+    // current frames ower second
+    int fps;
+
     // Width of the frames of the sprite instance
     int spriteWidth;
 
@@ -66,6 +69,10 @@ public:
     /// @brief Gets the number of frames of a sprite.
     /// @return int number of frames for a sprite
     int getFrameCount() const;
+
+    /// @brief Sets the fps of the Sprite model
+    /// @param new current fps
+    void setFPS(int newVal);
 
     /// @brief Gets the frame thumbnail from a sprite at an index.
     /// @param size_t index of the wanted frame thumbnail

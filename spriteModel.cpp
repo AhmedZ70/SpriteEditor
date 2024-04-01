@@ -3,6 +3,7 @@
 #include <QDebug>
 
 SpriteModel::SpriteModel(QObject *parent) : QObject(parent), sprite(),  currentFrameIndex(0) {
+    this->fps = 8;
 }
 
 void SpriteModel::addFrame() {
@@ -140,7 +141,7 @@ void SpriteModel::playAnimation() {
             playbackPopup = nullptr; // Reset the popup pointer
         });
 
-        playbackTimer->start(1000 / 2); // Adjust fps as needed
+        playbackTimer->start(1000 / fps); // Adjust fps as needed
     }
 
     if (playbackPopup && !playbackPopup->isVisible()) {
@@ -152,6 +153,9 @@ void SpriteModel::onDrawingStarted(){
         sprite.getFrame(currentFrameIndex).takeSnapshot();
 }
 
+void SpriteModel::setFPS(int newVal){
+    this->fps = newVal;
+}
 void SpriteModel::undo() {
     sprite.getFrame(currentFrameIndex).undo();
     emit spriteChanged();
