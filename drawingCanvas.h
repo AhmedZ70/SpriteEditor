@@ -17,6 +17,7 @@ class DrawingCanvas : public QWidget {
     Q_OBJECT
 
 private:
+
     // Current color chosen to draw with
     QColor currentColor;
 
@@ -43,7 +44,6 @@ protected:
 
 signals:
 
-    //void drawingChanged();
     /// @brief signal that indicates that a pixel has been chosen to be colored
     /// @param point that the user clicked (pixel)
     /// @param color taht the user chose to paint the pixel

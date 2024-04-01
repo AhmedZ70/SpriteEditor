@@ -64,6 +64,11 @@ MainWindow::MainWindow(QWidget *parent)
         spriteEditor->setFPS(value);
       //  spriteEditor->playAnimation();
     });
+
+    QTimer::singleShot(0, this, [this]() {
+        ui->pencilButton->click();
+    });
+
 }
 
 MainWindow::~MainWindow()

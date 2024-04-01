@@ -28,14 +28,9 @@ public:
     QColor getCurrentColor();
 
 private:
-    /// @brief Dialog that pops up to show color palette
+    /// Dialog that pops up to show color palette
     QColorDialog *colorDialog;
     // Current color that is being used by drawing
     QColor currentColor;
-    /// @brief Changes the current color to a new current color
-    void setCurrentColor();
 };
-
-
-
 #endif // COLORSELECTION_H

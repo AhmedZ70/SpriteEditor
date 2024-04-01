@@ -3,6 +3,7 @@ using namespace std;
 DrawingCanvas::DrawingCanvas(QWidget *parent)
     : QWidget(parent), currentColor(Qt::red){
     setAttribute(Qt::WA_StaticContents);
+    enterDrawingMode();
 }
 
 void DrawingCanvas::paintEvent(QPaintEvent *) {
@@ -59,23 +60,23 @@ void DrawingCanvas::colorChanged(QColor newColor) {
 
 void DrawingCanvas::enterDrawingMode() {
 
-    QPixmap cursorPixmap(":/icons/penMouse.png"); // Adjust the path to your icon
-    QPixmap scaledCursorPixmap = cursorPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    // Create the custom cursor
-    QCursor drawingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() ); // -1, -1 for using the default hot spot
+    QPixmap cursorPixmap(":/icons/penMouse.png");
+    QPixmap scaledCursorPixmap = cursorPixmap.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    // Create cursor
+    QCursor drawingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() );
 
-    // Set the custom cursor for the DrawingCanvas
+    // Set drawing cursor
     setCursor(drawingCursor);
 }
 
 void DrawingCanvas::erasingMode() {
 
-    QPixmap cursorPixmap(":/icons/eraser.png"); // Adjust the path to your icon
-    QPixmap scaledCursorPixmap = cursorPixmap.scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    // Create the custom cursor
-    QCursor erasingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() ); // -1, -1 for using the default hot spot
+    QPixmap cursorPixmap(":/icons/eraser.png");
+    QPixmap scaledCursorPixmap = cursorPixmap.scaled(20, 20, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    // Create cursor
+    QCursor erasingCursor(scaledCursorPixmap, 0, scaledCursorPixmap.height() );
 
-    // Set the custom cursor for the DrawingCanvas
+    // Set erasing cursor
     setCursor(erasingCursor);
 }
 

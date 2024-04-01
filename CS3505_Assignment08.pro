@@ -15,7 +15,6 @@ SOURCES += \
     frame.cpp \
     main.cpp \
     mainwindow.cpp \
-    playSprite.cpp \
     sprite.cpp \
     spriteModel.cpp
 
@@ -25,7 +24,6 @@ HEADERS += \
     drawingCanvas.h \
     frame.h \
     mainwindow.h \
-    playSprite.h \
     sprite.h \
     spriteModel.h
 
