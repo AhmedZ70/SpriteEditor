@@ -51,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::Load, spriteEditor, &SpriteModel::load);
     connect(this, &MainWindow::Save, spriteEditor, &SpriteModel::save);
 
-
     connect(ui->playSpriteButton, &QPushButton::clicked, spriteEditor, &SpriteModel::playAnimation);
+    connect(ui->showTrueSizeButton, &QPushButton::clicked, spriteEditor, &SpriteModel::showTrueSize);
 
     connect(spriteEditor, &SpriteModel::loaded, this, &MainWindow::updateFrameList);
     connect(this, &MainWindow::Drawing, canvas,&DrawingCanvas::enterDrawingMode);
@@ -158,6 +158,59 @@ void MainWindow::on_playSpriteButton_clicked(){
 void MainWindow::updateFpsLabel(int value) {
     ui->fpsValueLabel->setText(QString::number(value) + " FPS");
 }
+
+void MainWindow::onShowTrueSizeClicked(){
+    emit trueSizeClicked();
+}
+
+// void MainWindow::StartProgram(){
+//     ui->addFrameButton->setEnabled(true);
+//     ui->duplicateFrameButton->setEnabled(true);
+//     ui->deleteFrameButton->setEnabled(false);
+//     ui->undoButton->setEnabled(false);
+
+// }
+// Assuming `frameListWidget` is your QListWidget and `sprite` is your Sprite instance
+
+
+// void MainWindow::on_pencilButton_clicked(){
+//     emit on_Pencil_Clicked_Signal();
+//     std::cout << "Pencil Clicked signal sent" << std::endl;
+// }
+
+// void MainWindow::on_eraserButton_clicked(){
+//     emit on_Eraser_Clicked_Signal();
+//     std::cout << "OnEraser Clicked signal sent" << std::endl;
+// }
+
+// void MainWindow::on_FPS_clicked(){
+//     emit on_FPS_Clicked_Signal();
+//     std::cout << "OnFPS Clicked signal sent" << std::endl;
+
+// }
+
+// void MainWindow::on_SetSize_clicked(){
+//     emit on_SetSize_Clicked_Signal();
+//     std::cout << "OnSetSize signal sent" << std::endl;
+
+// }
+
+// void MainWindow::on_actionLoad_clicked(){
+//     emit on_Open_Clicked_Signal();
+//     std::cout << "OnOpen Clicked signal sent" << std::endl;
+
+// }
+
+// void MainWindow::on_actionSave_clicked(){
+//     emit on_Save_Signal();
+//     std::cout << "OnSave Clicked signal sent" << std::endl;
+// }
+
+// void MainWindow::on_duplicateFrameButton_clicked(){
+//     emit on_duplicateFrameButtonClicked_Signal();
+//     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;
+// }
+
 
 void MainWindow::showEvent(QShowEvent *event) {
     QMainWindow::showEvent(event);

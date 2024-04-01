@@ -38,6 +38,7 @@ signals:
     // void on_Save_Signal();
     //Signal that indicates whenever sprite was clicked
     void playSpriteClicked();
+    void trueSizeClicked();
     // void on_addFrameButton_Signal();
     // void on_duplicateFrameButtonClicked_Signal();
 
@@ -64,6 +65,8 @@ private slots:
 
     // emits signal for playing the sprite
     void on_playSpriteButton_clicked();
+
+    void onShowTrueSizeClicked();
     // emits signal for adding frame
     void onAddFrameButtonClicked();
     // emits signal for deleting a frame

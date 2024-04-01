@@ -211,11 +211,24 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="showTrueSizeButton">
+    <property name="geometry">
+     <rect>
+      <x>659</x>
+      <y>50</y>
+      <width>101</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show True Size</string>
+    </property>
+   </widget>
    <widget class="QLabel" name="fpsValueLabel">
     <property name="geometry">
      <rect>
       <x>700</x>
-      <y>380</y>
+      <y>390</y>
       <width>49</width>
       <height>16</height>
      </rect>
