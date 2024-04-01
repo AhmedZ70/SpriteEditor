@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     canvas = new DrawingCanvas(this);
 
     ui->fpsSlider->setMinimum(1);
-    ui->fpsSlider->setMaximum(24);
+    ui->fpsSlider->setMaximum(30);
     ui->fpsSlider->setValue(16);
 
     canvas->setGeometry(ui->drawPanel->geometry());
