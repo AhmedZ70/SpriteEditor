@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//#include <iostream>
+#include <iostream>
 #include <QColorDialog>
 #include <QColor>
 #include "spriteModel.h"
@@ -55,6 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui-> pencilButton->setIcon(QIcon(":/icons/penIcon.png"));
     ui-> eraserButton->setIcon(QIcon(":/icons/eraserIcon.png"));
 
+    //Connect the FPS slider to
+    connect(ui->fpsSlider, &QSlider::valueChanged, [&](int value) {
+        std::cout << "Slider value changed to:" << value;
+        spriteEditor->setFPS(value);
+      //  spriteEditor->playAnimation();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -132,6 +138,7 @@ void MainWindow::onColorPickerClicked(){
 void MainWindow::on_playSpriteButton_clicked(){
     emit playSpriteClicked();
 }
+
 
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);

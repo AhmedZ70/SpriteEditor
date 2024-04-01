@@ -55,7 +55,10 @@ signals:
     void Drawing();
     // signal sent to enter erasing mode
     void Erasing();
-
+    // signal that emits the new value of the FPS
+    void valueChanged(int);
+    // signal that refreshes the play sprite with new fps
+    void updatePlaySprite();
 
 private slots:
     // void StartProgram();
