@@ -9,7 +9,6 @@ void SpriteModel::addFrame() {
     sprite.addFrame(Frame(spriteWidth, spriteHeight));
     setCurrentFrameIndex(getFrameCount() - 1);
     emit spriteChanged();
-    // setPlaySpriteMembers();
 
 }
 
@@ -18,10 +17,6 @@ void SpriteModel::deleteFrame() {
     currentFrameIndex = sprite.frameCount()-1;
     emit spriteChanged();
 }
-
-// void SpriteModel::setPlaySpriteMembers(){
-//     spritePlayer->setFramesAndFPS(getAllFrames(), 69);
-// }
 
 std::vector<Frame> SpriteModel::getAllFrames() {
     return sprite.returnFrames();
@@ -51,16 +46,13 @@ QImage SpriteModel::getCurrentFrameImage(size_t index) {
     return QImage();
 }
 
-// void SpriteModel::playFrames(){
-//     spritePlayer->Play();
-// }
-
 void SpriteModel::updatePixel(const QPoint& canvasPoint, const QColor& color, int width, int height) {
     QPoint scaledPosition(canvasPoint.x() * getCurrentFrameImage(currentFrameIndex).width() / width, canvasPoint.y() * getCurrentFrameImage(currentFrameIndex).height() / height);
     if (currentFrameIndex < (int)sprite.frameCount()) {
         Frame& currentFrame = sprite.getFrame(currentFrameIndex);
         currentFrame.setPixel(scaledPosition.x(), scaledPosition.y(), color);
         emit spriteChanged();
+
     }
 }
 
@@ -156,5 +148,17 @@ void SpriteModel::playAnimation() {
     }
 }
 
+void SpriteModel::onDrawingStarted(){
+        sprite.getFrame(currentFrameIndex).takeSnapshot();
+}
 
+void SpriteModel::undo() {
+    sprite.getFrame(currentFrameIndex).undo();
+    emit spriteChanged();
+}
+
+void SpriteModel::redo() {
+    sprite.getFrame(currentFrameIndex).redo();
+    emit spriteChanged();
+}
 

@@ -37,10 +37,13 @@ void DrawingCanvas::mouseMoveEvent(QMouseEvent *event) {
 
 void DrawingCanvas::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
+        emit drawingStarted();
         const QPoint canvasPoint = event->position().toPoint();
         emit requestPixelChange(canvasPoint, currentColor, width(), height());
+
     }
 }
+
 void DrawingCanvas::receiveCurrentImage(const QImage& image) {
     currentImage = image;
 }

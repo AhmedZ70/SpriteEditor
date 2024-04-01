@@ -55,8 +55,6 @@ int dimensionsDialog::getHeight() const {
     return heightEdit->text().toInt();
 }
 
-
-
 void dimensionsDialog::updateSecondInput(const QString &text) {
 
     heightEdit->setText(text);

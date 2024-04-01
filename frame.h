@@ -7,6 +7,7 @@
 #include <QBuffer>
 #include <QByteArray>
 #include <QJsonObject>
+#include <QStack>
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -19,6 +20,9 @@ class Frame{
 private:
     // Member variable that holds an image displayed on the frame
     QImage image;
+
+    QStack<QImage> undoStack;
+    QStack<QImage> redoStack;
 
 public:
 
@@ -45,6 +49,12 @@ public:
     /// @param QJsonObject to deserialize
     /// @return Frame object after deserialization.
     static Frame fromJson(const QJsonObject& json);
+
+    void takeSnapshot();
+
+    void undo();
+
+    void redo();
 };
 
 #endif // FRAME_H

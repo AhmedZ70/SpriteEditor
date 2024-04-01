@@ -52,3 +52,22 @@ Frame Frame::fromJson(const QJsonObject& json) {
 
     return frame;
 }
+
+void Frame::takeSnapshot() {
+    undoStack.push(image.copy());
+    redoStack.clear();
+}
+
+void Frame::undo() {
+    if (!undoStack.isEmpty()) {
+        redoStack.push(image);
+        image = undoStack.pop();
+    }
+}
+
+void Frame::redo() {
+    if (!redoStack.isEmpty()) {
+        undoStack.push(image);
+        image = redoStack.pop();
+    }
+}

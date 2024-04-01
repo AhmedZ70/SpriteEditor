@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QStack>
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -23,6 +24,10 @@ private:
     // Image representing a frame
     QImage currentImage;
 
+  //  bool drawingStarted = false;
+
+
+
 public:
     //Constructor that sets by default the current color as red
     explicit DrawingCanvas(QWidget *parent = nullptr);
@@ -35,6 +40,7 @@ protected:
     /// @brief event that sends a signal that the mouse has been pressed
     void mousePressEvent(QMouseEvent *event) override;
 
+
 signals:
 
     //void drawingChanged();
@@ -46,6 +52,7 @@ signals:
     void requestPixelChange(const QPoint& point, const QColor& color, int canvasWidth, int canvasHeight);
     /// @brief signal that requests an update of the new image
     void requestCurrentImage();
+    void drawingStarted();
 
 public slots:
     /// @brief changes the current color to a new one selected by the user
@@ -58,6 +65,11 @@ public slots:
     void enterDrawingMode();
     /// @brief changes the icon of the cursor to an eraser and enters erasing mode
     void erasingMode();
+
+
+
+
+
 };
 
 #endif // DRAWINGCANVAS_H

@@ -51,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::Drawing, canvas,&DrawingCanvas::enterDrawingMode);
     connect(this, &MainWindow::Erasing, canvas,&DrawingCanvas::erasingMode);
 
+    connect(canvas, &DrawingCanvas::drawingStarted, spriteEditor, &SpriteModel::onDrawingStarted);
+    connect(ui->undoButton, &QPushButton::clicked, spriteEditor, &SpriteModel::undo);
+    connect(ui->redoButton, &QPushButton::clicked, spriteEditor, &SpriteModel::redo);
 
     ui-> pencilButton->setIcon(QIcon(":/icons/penIcon.png"));
     ui-> eraserButton->setIcon(QIcon(":/icons/eraserIcon.png"));

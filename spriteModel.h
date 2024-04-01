@@ -40,7 +40,6 @@ private:
     int currentPlaybackFrameIndex = 0; // Tracks the current frame index for playback
     QTimer* playbackTimer = nullptr; // Manages the playback timing
     QDialog* playbackPopup = nullptr;
-    // PlaySprite * spritePlayer;
 
 public:
     /// @brief Constructor for sprite model
@@ -85,9 +84,8 @@ public:
     /// @param QPoint position where the pixel will be drawn
     /// @param QColor color of the pixel to be drawn
     void drawPixel(const QPoint& position, const QColor& color);
+
     Frame & getCurrentFrame(int index);
-
-
 
     std::vector<Frame> getAllFrames();
 
@@ -117,6 +115,13 @@ public slots:
          /// @param const QString& fileName The name of the file to load the sprite from
          /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
          void load(const QString& fileName);
+
+         void onDrawingStarted();
+
+         void undo();
+
+         void redo();
+
 
 };
 
