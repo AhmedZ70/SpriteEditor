@@ -17,10 +17,17 @@ MainWindow::MainWindow(QWidget *parent)
     spriteEditor = new SpriteModel(this);
     canvas = new DrawingCanvas(this);
 
+    ui->fpsSlider->setMinimum(1);
+    ui->fpsSlider->setMaximum(24);
+    ui->fpsSlider->setValue(16);
 
     canvas->setGeometry(ui->drawPanel->geometry());
     delete ui->drawPanel;
     ui->drawPanel = canvas;
+    ui->framesList->setIconSize(QSize(64, 64));
+    ui->framesList->setFixedWidth(128);
+    updateFpsLabel(ui->fpsSlider->value());
+
 
     connect(canvas, &DrawingCanvas::requestPixelChange, spriteEditor, &SpriteModel::updatePixel);
     connect(spriteEditor, &SpriteModel::spriteChanged, canvas, &DrawingCanvas::updateDrawing);
@@ -62,8 +69,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->fpsSlider, &QSlider::valueChanged, [&](int value) {
         std::cout << "Slider value changed to:" << value;
         spriteEditor->setFPS(value);
-      //  spriteEditor->playAnimation();
     });
+    connect(ui->fpsSlider, &QSlider::valueChanged, this, &MainWindow::updateFpsLabel);
+
 
     QTimer::singleShot(0, this, [this]() {
         ui->pencilButton->click();
@@ -147,55 +155,9 @@ void MainWindow::on_playSpriteButton_clicked(){
     emit playSpriteClicked();
 }
 
-
-// void MainWindow::StartProgram(){
-//     ui->addFrameButton->setEnabled(true);
-//     ui->duplicateFrameButton->setEnabled(true);
-//     ui->deleteFrameButton->setEnabled(false);
-//     ui->undoButton->setEnabled(false);
-
-// }
-// Assuming `frameListWidget` is your QListWidget and `sprite` is your Sprite instance
-
-
-// void MainWindow::on_pencilButton_clicked(){
-//     emit on_Pencil_Clicked_Signal();
-//     std::cout << "Pencil Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_eraserButton_clicked(){
-//     emit on_Eraser_Clicked_Signal();
-//     std::cout << "OnEraser Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_FPS_clicked(){
-//     emit on_FPS_Clicked_Signal();
-//     std::cout << "OnFPS Clicked signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_SetSize_clicked(){
-//     emit on_SetSize_Clicked_Signal();
-//     std::cout << "OnSetSize signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_actionLoad_clicked(){
-//     emit on_Open_Clicked_Signal();
-//     std::cout << "OnOpen Clicked signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_actionSave_clicked(){
-//     emit on_Save_Signal();
-//     std::cout << "OnSave Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_duplicateFrameButton_clicked(){
-//     emit on_duplicateFrameButtonClicked_Signal();
-//     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;
-// }
-
+void MainWindow::updateFpsLabel(int value) {
+    ui->fpsValueLabel->setText(QString::number(value) + " FPS");
+}
 
 void MainWindow::showEvent(QShowEvent *event) {
     QMainWindow::showEvent(event);

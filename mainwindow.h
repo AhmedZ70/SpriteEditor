@@ -61,14 +61,6 @@ signals:
     void updatePlaySprite();
 
 private slots:
-    // void StartProgram();
-    // void on_pencilButton_clicked();
-    // void on_eraserButton_clicked();
-    // void on_FPS_clicked();
-    // void on_SetSize_clicked();
-    // void on_actionLoad_clicked();
-    // void on_actionSave_clicked();
-    // void on_duplicateFrameButton_clicked();
 
     // emits signal for playing the sprite
     void on_playSpriteButton_clicked();
@@ -94,6 +86,8 @@ private slots:
     void onSaveClicked();
     // emits load signal and provides file name
     void onLoadClicked();
+
+    void updateFpsLabel(int value);
 
 private:
     // UI responsible of the view

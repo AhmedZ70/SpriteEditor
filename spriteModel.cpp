@@ -3,7 +3,7 @@
 #include <QDebug>
 
 SpriteModel::SpriteModel(QObject *parent) : QObject(parent), sprite(),  currentFrameIndex(0) {
-    this->fps = 8;
+    this->fps = 16;
 }
 
 void SpriteModel::addFrame() {

@@ -10,10 +10,9 @@ void DrawingCanvas::paintEvent(QPaintEvent *) {
     emit requestCurrentImage();
     QPainter painter(this);
 
-    // Draw checkerboard pattern
     int tileSize = 10;
-    QColor color1(220, 220, 220); // Light gray
-    QColor color2(255, 255, 255); // White
+    QColor color1(220, 220, 220);
+    QColor color2(255, 255, 255);
     QRect background = this->rect();
 
     for (int y = 0; y < background.height(); y += tileSize) {
