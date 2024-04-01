@@ -44,8 +44,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::Load, spriteEditor, &SpriteModel::load);
     connect(this, &MainWindow::Save, spriteEditor, &SpriteModel::save);
 
-
     connect(ui->playSpriteButton, &QPushButton::clicked, spriteEditor, &SpriteModel::playAnimation);
+    connect(ui->showTrueSizeButton, &QPushButton::clicked, spriteEditor, &SpriteModel::showTrueSize);
 
     connect(spriteEditor, &SpriteModel::loaded, this, &MainWindow::updateFrameList);
     connect(this, &MainWindow::Drawing, canvas,&DrawingCanvas::enterDrawingMode);
@@ -147,6 +147,10 @@ void MainWindow::on_playSpriteButton_clicked(){
     emit playSpriteClicked();
 }
 
+
+void MainWindow::onShowTrueSizeClicked(){
+    emit trueSizeClicked();
+}
 
 // void MainWindow::StartProgram(){
 //     ui->addFrameButton->setEnabled(true);

@@ -50,6 +50,8 @@ public:
 
     void playAnimation();
 
+    void showTrueSize();
+
     // ~SpriteModel();
 
     /// @brief Adds a frame to the the sprite (wrapper).

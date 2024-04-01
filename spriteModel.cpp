@@ -150,6 +150,50 @@ void SpriteModel::playAnimation() {
     }
 }
 
+void SpriteModel::showTrueSize() {
+    if (!playbackPopup) {
+        playbackPopup = new QDialog();
+        playbackPopup->setWindowTitle("True Size Preview");
+        allFrames = getAllFrames();
+        QVBoxLayout* layout = new QVBoxLayout(playbackPopup);
+
+        QLabel* imageLabel = new QLabel(playbackPopup);
+        layout->addWidget(imageLabel);
+
+        playbackPopup->setLayout(layout);
+        playbackPopup->setAttribute(Qt::WA_DeleteOnClose);
+
+        playbackTimer = new QTimer(playbackPopup);
+        connect(playbackTimer, &QTimer::timeout, this, [this, imageLabel]() {
+            if (currentPlaybackFrameIndex < allFrames.size()) {
+                QImage img = allFrames[currentPlaybackFrameIndex++].getImage();
+                if (!img.isNull()) {
+                    imageLabel->setPixmap(QPixmap::fromImage(img)); // Display image at true size
+                } else {
+                    qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
+                }
+                if (currentPlaybackFrameIndex >= allFrames.size()) {
+                    currentPlaybackFrameIndex = 0; // Loop back to the first frame
+                }
+            }
+        });
+        // Ensure the dialog and timer are cleaned up properly
+        connect(playbackPopup, &QDialog::destroyed, [this]() {
+            playbackTimer->stop(); // Stop the timer to prevent further ticks
+            playbackTimer = nullptr; // Reset the timer pointer
+            playbackPopup = nullptr; // Reset the popup pointer
+        });
+
+        playbackTimer->start(1000 / fps); // Adjust fps as needed
+    }
+
+    if (playbackPopup && !playbackPopup->isVisible()) {
+        playbackPopup->show();
+    }
+}
+
+
+
 void SpriteModel::onDrawingStarted(){
         sprite.getFrame(currentFrameIndex).takeSnapshot();
 }
