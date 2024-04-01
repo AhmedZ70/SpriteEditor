@@ -28,14 +28,7 @@ public:
     ~MainWindow();
 
 signals:
-    // void on_Pencil_Clicked_Signal();
-    // void on_Eraser_Clicked_Signal();
-    // void on_Color_Clicked_Signal();
-    // void on_NewFrame_ClickedSignal();
-    // void on_FPS_Clicked_Signal();
-    // void on_SetSize_Clicked_Signal();
-    // void on_Open_Clicked_Signal();
-    // void on_Save_Signal();
+
     //Signal that indicates whenever sprite was clicked
     void playSpriteClicked();
     void trueSizeClicked();
@@ -62,9 +55,6 @@ signals:
     void updatePlaySprite();
 
 private slots:
-
-    // emits signal for playing the sprite
-    void on_playSpriteButton_clicked();
 
     void onShowTrueSizeClicked();
     // emits signal for adding frame

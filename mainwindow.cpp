@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(canvas, &DrawingCanvas::requestPixelChange, spriteEditor, &SpriteModel::updatePixel);
     connect(spriteEditor, &SpriteModel::spriteChanged, canvas, &DrawingCanvas::updateDrawing);
+    connect(spriteEditor, &SpriteModel::spriteChanged, this, &MainWindow::updateFrameList);
     connect(canvas, &DrawingCanvas::requestCurrentImage, this, &MainWindow::provideCurrentImage);
 
     connect(ui->addFrameButton, &QPushButton::clicked, this, &MainWindow::onAddFrameButtonClicked);
@@ -40,9 +41,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->duplicateFrameButton, &QPushButton::clicked, this, &MainWindow::onDuplicateFrameButtonClicked);
     connect(ui->colorPicker, &QPushButton::clicked, this, &MainWindow::onColorPickerClicked);
 
-    //connect(this, &MainWindow::spriteUpdated, spriteEditor, &SpriteModel::setPlaySpriteMembers);
-
-    connect(this, &MainWindow::spriteUpdated, this, &MainWindow::updateFrameList);
     connect(ui->framesList, &QListWidget::itemClicked, this, &MainWindow::OnFrameListWidgetItemClicked);
     connect(this, &MainWindow::colorSelected, canvas, &DrawingCanvas::colorChanged);
     connect(this, &MainWindow::dimensionsSet, spriteEditor, &SpriteModel::setInitialFrame);
@@ -151,9 +149,6 @@ void MainWindow::onColorPickerClicked(){
     emit colorSelected(selectedColor);
 }
 
-void MainWindow::on_playSpriteButton_clicked(){
-    emit playSpriteClicked();
-}
 
 void MainWindow::updateFpsLabel(int value) {
     ui->fpsValueLabel->setText(QString::number(value) + " FPS");
@@ -162,55 +157,6 @@ void MainWindow::updateFpsLabel(int value) {
 void MainWindow::onShowTrueSizeClicked(){
     emit trueSizeClicked();
 }
-
-// void MainWindow::StartProgram(){
-//     ui->addFrameButton->setEnabled(true);
-//     ui->duplicateFrameButton->setEnabled(true);
-//     ui->deleteFrameButton->setEnabled(false);
-//     ui->undoButton->setEnabled(false);
-
-// }
-// Assuming `frameListWidget` is your QListWidget and `sprite` is your Sprite instance
-
-
-// void MainWindow::on_pencilButton_clicked(){
-//     emit on_Pencil_Clicked_Signal();
-//     std::cout << "Pencil Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_eraserButton_clicked(){
-//     emit on_Eraser_Clicked_Signal();
-//     std::cout << "OnEraser Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_FPS_clicked(){
-//     emit on_FPS_Clicked_Signal();
-//     std::cout << "OnFPS Clicked signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_SetSize_clicked(){
-//     emit on_SetSize_Clicked_Signal();
-//     std::cout << "OnSetSize signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_actionLoad_clicked(){
-//     emit on_Open_Clicked_Signal();
-//     std::cout << "OnOpen Clicked signal sent" << std::endl;
-
-// }
-
-// void MainWindow::on_actionSave_clicked(){
-//     emit on_Save_Signal();
-//     std::cout << "OnSave Clicked signal sent" << std::endl;
-// }
-
-// void MainWindow::on_duplicateFrameButton_clicked(){
-//     emit on_duplicateFrameButtonClicked_Signal();
-//     std::cout << "Duplicate Frame Button Clicked signal sent" << std::endl;
-// }
-
 
 void MainWindow::showEvent(QShowEvent *event) {
     QMainWindow::showEvent(event);
