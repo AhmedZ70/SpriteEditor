@@ -6,18 +6,18 @@
 #include <QMessageBox>
 
 dimensionsDialog::dimensionsDialog(QWidget *parent)
-    : QDialog(parent), widthEdit(new QLineEdit(this)), heightEdit(new QLineEdit(this)) {
+    : QDialog(parent), widthText(new QLineEdit(this)), heightText(new QLineEdit(this)) {
 
     // Set validators to ensure only integers are entered
-    widthEdit->setValidator(new QIntValidator(1, 10000, this));
-    heightEdit->setValidator(new QIntValidator(1, 10000, this));
-    widthEdit->setText("64");
-    heightEdit->setText("64");
+    widthText->setValidator(new QIntValidator(1, 10000, this));
+    heightText->setValidator(new QIntValidator(1, 10000, this));
+    widthText->setText("64");
+    heightText->setText("64");
 
     // Set up the form layout with labels and line edits
     QFormLayout *formLayout = new QFormLayout();
-    formLayout->addRow(tr("&Width:"), widthEdit);
-    formLayout->addRow(tr("&Height:"), heightEdit);
+    formLayout->addRow(tr("&Width:"), widthText);
+    formLayout->addRow(tr("&Height:"), heightText);
 
     // Create OK and Cancel buttons
     QPushButton *okButton = new QPushButton(tr("OK"));
@@ -42,35 +42,42 @@ dimensionsDialog::dimensionsDialog(QWidget *parent)
     // Set the window title
     setWindowTitle(tr("Set Dimensions"));
 
-    connect(widthEdit, &QLineEdit::textChanged, this, &dimensionsDialog::updateSecondInput);
-    connect(heightEdit, &QLineEdit::textChanged, this, &dimensionsDialog::updateFirstInput);
+    connect(widthText, &QLineEdit::textChanged, this, &dimensionsDialog::updateSecondInput);
+    connect(heightText, &QLineEdit::textChanged, this, &dimensionsDialog::updateFirstInput);
     setWindowFlags(windowFlags() & ~Qt::WindowCloseButtonHint & ~Qt::WindowContextHelpButtonHint);
 }
 
 int dimensionsDialog::getWidth() const {
-    return widthEdit->text().toInt();
+    return widthText->text().toInt();
 }
 
 int dimensionsDialog::getHeight() const {
-    return heightEdit->text().toInt();
+    return heightText->text().toInt();
 }
 
 void dimensionsDialog::updateSecondInput(const QString &text) {
 
-    heightEdit->setText(text);
+    heightText->setText(text);
 }
 
 void dimensionsDialog::updateFirstInput(const QString &text) {
-    widthEdit->setText(text);
+    widthText->setText(text);
 }
 
 void dimensionsDialog::accept() {
-
+    int width = widthText->text().toInt();
+    int height = heightText->text().toInt();
     // Check if either input field is empty
-    if (widthEdit->text().isEmpty() || heightEdit->text().isEmpty()) {
+    if (widthText->text().isEmpty() || heightText->text().isEmpty()) {
         QMessageBox::warning(this, tr("Input Error"), tr("Width and Height cannot be empty."));
         return;
     }
+
+    if (height< 2 || height > 256|| width < 2 || width > 256) {
+        QMessageBox::warning(this, tr("Input Error"), tr("Width and Height must be less than 256."));
+        return;
+    }
+
 
     QDialog::accept();
 }

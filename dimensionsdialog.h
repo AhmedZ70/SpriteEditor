@@ -8,8 +8,8 @@
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name dimensions dialog h file for assignment8
- * This h file contains the outlined methods for choosing the width and height of the sprite
+ * @name dimensions dialog .h file for assignment8
+ * This .h file contains the outlined methods for choosing the width and height of the sprite
  * The user will choose the dimensions by a popup at the start of the program execution
 */
 class dimensionsDialog: public QDialog {
@@ -25,20 +25,23 @@ public:
 
 private:
     // Text editor for width
-    QLineEdit *widthEdit;
+    QLineEdit *widthText;
     // Text editor for height
-    QLineEdit *heightEdit;
+    QLineEdit *heightText;
 
 
 public slots:
     /// @brief sets the text for width
+    /// @param the text to use to set the width
     void updateSecondInput(const QString &text);
     /// @brief sets the text for height
+    /// @param the text to use to set the height
     void updateFirstInput(const QString &text);
 
 
 protected:
-    /// @brief checks that the width and height are not null or zero
+
+ /// @brief checks that the width and height are not null or zero
 void accept() override;
 
  };

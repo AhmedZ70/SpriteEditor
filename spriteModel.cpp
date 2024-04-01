@@ -14,6 +14,7 @@ void SpriteModel::addFrame() {
 }
 
 void SpriteModel::deleteFrame() {
+    if(sprite.frameCount() > 1)
     sprite.removeFrame(currentFrameIndex);
     currentFrameIndex = sprite.frameCount()-1;
     emit spriteChanged();
