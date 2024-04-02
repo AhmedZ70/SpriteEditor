@@ -205,7 +205,7 @@ void SpriteModel::onDrawingStarted(){
 
 void SpriteModel::setFPS(int newVal){
     this->fps = newVal;
-    if (fps > 0) {
+    if (fps > 0 && playbackPopup && playbackPopup->isVisible())  {
         int interval = 1000 / fps;
         playbackTimer->setInterval(interval);
     }
