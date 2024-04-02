@@ -5,7 +5,10 @@
 SpriteModel::SpriteModel(QObject *parent) : QObject(parent), sprite(),  currentFrameIndex(0) {
     this->fps = 16;
 }
-
+SpriteModel:: ~SpriteModel(){
+    delete playbackTimer;
+    delete playbackPopup;
+}
 void SpriteModel::addFrame() {
     sprite.addFrame(Frame(spriteWidth, spriteHeight));
     setCurrentFrameIndex(getFrameCount() - 1);
