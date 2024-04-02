@@ -5,18 +5,25 @@
  * @date April. 1, 2024
  * @name frame cpp file for assignment8
  * This cpp file contains the method definitions for a frame to be used in a sprite editor app.
+ *
+ * File and software practice principles reviewed by Joel Ronca.
 */
 
-// Constructor definition
 Frame::Frame(int width, int height) : image(width, height, QImage::Format_ARGB32) {
+
+    // Makes the image transparent
     image.fill(Qt::transparent);
 }
 
-// getImage definition
-QImage& Frame::getImage() { return image; }
+QImage& Frame::getImage() {
 
-// setPixel definition
+    // Returns the image
+    return image;
+}
+
 void Frame::setPixel(int x, int y, const QColor &color) {
+
+    // Sets the pixel color if the image is within the correct bounds
     if (x >= 0 && x < image.width() && y >= 0 && y < image.height()) {
         image.setPixelColor(x, y, color);
     }
@@ -25,16 +32,16 @@ void Frame::setPixel(int x, int y, const QColor &color) {
 QJsonObject Frame::toJson() const {
     QJsonObject json;
 
-    // Convert QImage to QByteArray in PNG format
+    // Converts QImage to QByteArray in PNG format
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     buffer.open(QIODevice::WriteOnly);
     this->image.save(&buffer, "PNG");
 
-    // Convert QByteArray to base64 string and store in JSON
+    // Converts QByteArray to base64 string and store in JSON
     json["image"] = QString::fromUtf8(byteArray.toBase64());
 
-    // Store image dimensions
+    // Stores image dimensions
     json["width"] = this->image.width();
     json["height"] = this->image.height();
 
@@ -44,9 +51,11 @@ QJsonObject Frame::toJson() const {
 Frame Frame::fromJson(const QJsonObject& json) {
     QByteArray byteArray = QByteArray::fromBase64(json["image"].toString().toUtf8());
 
+    // Stores image from json into a QImage
     QImage image;
     image.loadFromData(byteArray, "PNG");
 
+    // Stores frame by frame of the image
     Frame frame(image.width(), image.height());
     frame.image = image;
 
@@ -54,20 +63,30 @@ Frame Frame::fromJson(const QJsonObject& json) {
 }
 
 void Frame::takeSnapshot() {
+
+    // Stores a copy of the image onto the stack
     undoStack.push(image.copy());
     redoStack.clear();
 }
 
 void Frame::undo() {
     if (!undoStack.isEmpty()) {
+
+        // If the undo stack is not empty, push onto the stack
         redoStack.push(image);
+
+        // Pop and store the returned image from the undo stack
         image = undoStack.pop();
     }
 }
 
 void Frame::redo() {
     if (!redoStack.isEmpty()) {
+
+        // If the redo stack is not empty, push onto the undo stack
         undoStack.push(image);
+
+        // Pop and store the image from the redo stack
         image = redoStack.pop();
     }
 }
