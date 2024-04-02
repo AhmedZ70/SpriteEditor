@@ -17,7 +17,6 @@ Our Sprite Editor is a sophisticated Qt C++ application that allows users to cre
 
 ## Software Requirements:
 Operating System: Any OS capable of running Qt, including Windows, macOS, and Linux.
-
 Qt Framework: Version Qt 6.6.0 or above.
 
 ## Extra Features
