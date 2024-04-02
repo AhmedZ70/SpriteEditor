@@ -12,23 +12,12 @@ Sprite-Editor created by GitHub Classroom
 - Authors Information 
 
 ## Project Description
-The Snake Server Project is a continuation of the Snake Game client, expanding upon the existing application to include a server that manages multiple clients, game states, and new gameplay elements.
-The server is a .NET 7 console application designed to handle game logic, client communications, and to ensure a seamless multiplayer experience. This document outlines the server's implementation details,
- including software requirements, design decisions, and troubleshooting steps.
+Our Sprite Editor is a sophisticated Qt C++ application that allows users to create, edit, and animate sprites. This tool is particularly tailored for artists and game developers looking to design pixel art and sprite sheets. Key features include drawing, erasing, frame editing, sprite animation with adjustable frame rates, and a robust color picker.
+
 
 ## Software Requirements:
-.NET MAUI: The project relies heavily on the Microsoft .NET MAUI framework. Ensure you have the latest version installed.
-
-IDE with .NET Support: This project was developed in Visual Studio. It is recommended to use Visual Studio with support for .NET MAUI projects for best compatibility.
-
-JSON library for serialization and deserialization
-
-XML library for settings configuration
-
-Operating System: This project is cross-platform and should work on Windows, 
-macOS, and Linux. However, the primary development was on Windows. 
-Ensure you have the latest OS updates for stability.
-
+Operating System: Any OS capable of running Qt, including Windows, macOS, and Linux.
+Qt Framework: Version Qt 6.6.0 or above.
 
 ## Extra Features
 
