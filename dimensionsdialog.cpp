@@ -5,6 +5,16 @@
 #include <QPushButton>
 #include <QMessageBox>
 
+/**
+ * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
+ * @date April. 1, 2024
+ * @name dimensions dialog .cpp file for assignment8
+ * This .cpp file contains the method implementations for choosing the width and height of the sprite
+ * The user will choose the dimensions by a popup at the start of the program execution
+ *
+ * File and software practice principles reviewed by Ahmed Zahran.
+*/
+
 dimensionsDialog::dimensionsDialog(QWidget *parent)
     : QDialog(parent), widthText(new QLineEdit(this)), heightText(new QLineEdit(this)) {
 
@@ -56,7 +66,6 @@ int dimensionsDialog::getHeight() const {
 }
 
 void dimensionsDialog::updateSecondInput(const QString &text) {
-
     heightText->setText(text);
 }
 
@@ -67,17 +76,18 @@ void dimensionsDialog::updateFirstInput(const QString &text) {
 void dimensionsDialog::accept() {
     int width = widthText->text().toInt();
     int height = heightText->text().toInt();
+
     // Check if either input field is empty
     if (widthText->text().isEmpty() || heightText->text().isEmpty()) {
         QMessageBox::warning(this, tr("Input Error"), tr("Width and Height cannot be empty."));
         return;
     }
 
+    // Checks if width/height exceeds 256
     if (height< 2 || height > 256|| width < 2 || width > 256) {
         QMessageBox::warning(this, tr("Input Error"), tr("Width and Height must be less than 256."));
         return;
     }
-
 
     QDialog::accept();
 }

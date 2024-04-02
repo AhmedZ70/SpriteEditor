@@ -17,16 +17,16 @@
 
 class Sprite {
 private:
-    // list cntaining the frames of the sprite
+    /// @brief List cntaining the frames of the sprite
     std::vector<Frame> frames;
 
-    // int of the pixel width of a sprite frame
+    /// @brief int of the pixel width of a sprite frame
     int width;
 
-    // int of the pixel height of a sprite frame
+    /// @brief int of the pixel height of a sprite frame
     int height;
 
-    // int of the current frame that is displayed
+    /// @brief int of the current frame that is displayed
     int currentFrame;
 
 public:
@@ -64,9 +64,13 @@ public:
     /// @brief Removes the current frame from the list and goes to the previous frame, if none creates new empty frame.
     void removeFrame();
 
+    /// @brief Getter method to return a reference of the current frame
+    /// @param The index at the which the current frame should be returned
     Frame& getCurrentFrame(int index);
 
     /// @brief Duplicates the current frame as a new next frame.
+    /// @param Index at which the frame it shld be inserted at
+    /// @param New frame to be inserted
     void insertFrame(size_t index, const Frame& frame);
 
     /// @brief Serializes the sprite to a Json object.
@@ -78,6 +82,8 @@ public:
     /// @return Sprite object after being deserialized
     static Sprite fromJson(const QJsonObject& json);
 
+    /// @brief Returns a vector list of all the frames
+    /// @return the vector list of frames
     std::vector<Frame> returnFrames();
 };
 

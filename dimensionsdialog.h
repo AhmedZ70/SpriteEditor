@@ -18,32 +18,35 @@ class dimensionsDialog: public QDialog {
 public:
     /// @brief Opens the dimension popup to choose the width and height
     explicit dimensionsDialog(QWidget *parent = nullptr);
-    /// @brief returns the width set by the user
+    /// @brief Returns the width set by the user
     int getWidth() const;
-    /// @brief returns the height set by the user
+    /// @brief Returns the height set by the user
     int getHeight() const;
 
 private:
-    // Text editor for width
+    /// @brief Text editor for width
     QLineEdit *widthText;
-    // Text editor for height
+
+    /// @brief Text editor for height
     QLineEdit *heightText;
 
 
 public slots:
-    /// @brief sets the text for width
-    /// @param the text to use to set the width
+    /// @brief Sets the text for width
+    /// @param The text to use to set the width
     void updateSecondInput(const QString &text);
-    /// @brief sets the text for height
-    /// @param the text to use to set the height
+
+    /// @brief Sets the text for height
+    /// @param The text to use to set the height
     void updateFirstInput(const QString &text);
 
 
 protected:
 
- /// @brief checks that the width and height are not null or zero
-void accept() override;
+     /// @brief Checks that the width and height are not null or zero
+    void accept() override;
 
  };
+
 #endif // DIMENSIONSDIALOG_H
 

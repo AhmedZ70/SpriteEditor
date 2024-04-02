@@ -158,10 +158,12 @@ void SpriteModel::showTrueSize() {
         QVBoxLayout* layout = new QVBoxLayout(playbackPopup);
 
         QLabel* imageLabel = new QLabel(playbackPopup);
+        imageLabel->setAlignment(Qt::AlignCenter); // Center the image
         layout->addWidget(imageLabel);
 
         playbackPopup->setLayout(layout);
         playbackPopup->setAttribute(Qt::WA_DeleteOnClose);
+        playbackPopup->resize(300, 300); // Adjust the width and height as needed
 
         playbackTimer = new QTimer(playbackPopup);
         connect(playbackTimer, &QTimer::timeout, this, [this, imageLabel]() {

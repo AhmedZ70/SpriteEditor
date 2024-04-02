@@ -18,10 +18,13 @@
 
 class Frame{
 private:
-    // Member variable that holds an image displayed on the frame
+    /// @brief Member variable that holds an image displayed on the frame
     QImage image;
 
+    /// @brief Member variable that will hold the stack for any undo signals
     QStack<QImage> undoStack;
+
+    /// @brief Member variable that will hold the stack for any undo signals
     QStack<QImage> redoStack;
 
 public:
@@ -50,10 +53,13 @@ public:
     /// @return Frame object after deserialization.
     static Frame fromJson(const QJsonObject& json);
 
+    /// @brief Signal to take a snapshot to store as a frame
     void takeSnapshot();
 
+    /// @brief Signal to undo any changes
     void undo();
 
+    /// @brief Signal to redo any changes
     void redo();
 };
 

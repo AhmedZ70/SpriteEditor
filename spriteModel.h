@@ -24,35 +24,48 @@ class SpriteModel : public QObject {
     Q_OBJECT
 
 private:
-    // Instance variable of a sprite
+
+    /// @brief Instance variable of a sprite
     Sprite sprite;
 
-    // Current frame of the sprite instance
+    /// @brief Current frame of the sprite instance
     int currentFrameIndex;
 
-    // current frames ower second
+    /// @brief current frames ower second
     int fps;
 
-    // Width of the frames of the sprite instance
+    /// @brief Width of the frames of the sprite instance
     int spriteWidth;
 
-    // Height of the frames of the sprite instance
+    /// @brief Height of the frames of the sprite instance
     int spriteHeight;
 
-    std::vector<Frame> allFrames; // Consider storing frames as a member if they don't change often
-    int currentPlaybackFrameIndex = 0; // Tracks the current frame index for playback
-    QTimer* playbackTimer = nullptr; // Manages the playback timing
+    /// @brief Vector of all of the frames
+    std::vector<Frame> allFrames;
+
+    /// @brief Tracks the current frame index for playback
+    int currentPlaybackFrameIndex = 0;
+
+    /// @brief Manages the playback timing
+    QTimer* playbackTimer = nullptr;
+
+    /// @brief Manages the playback popups
     QDialog* playbackPopup = nullptr;
 
 public:
+
     /// @brief Constructor for sprite model
+    /// @param Sets the QObject provided to a nullptr
     explicit SpriteModel(QObject *parent = nullptr);
 
+    /// @brief Plays the sprite animation
     void playAnimation();
 
+    /// @brief Plays an animation of the spirte at its true pixel size
     void showTrueSize();
 
-    // ~SpriteModel();
+    /// @brief Destructor for Sprite Model class
+    ~SpriteModel();
 
     /// @brief Adds a frame to the the sprite (wrapper).
     void addFrame();
@@ -73,7 +86,7 @@ public:
     int getFrameCount() const;
 
     /// @brief Sets the fps of the Sprite model
-    /// @param new current fps
+    /// @param New current fps
     void setFPS(int newVal);
 
     /// @brief Gets the frame thumbnail from a sprite at an index.
@@ -94,11 +107,17 @@ public:
     /// @param QColor color of the pixel to be drawn
     void drawPixel(const QPoint& position, const QColor& color);
 
-    Frame & getCurrentFrame(int index);
+    /// @brief Retrieves the frame at the specified index
+    /// @param Index at which the frame should be return at
+    /// @return The current frame
+    Frame& getCurrentFrame(int index);
 
+    /// @brief Retrieves all the frames
+    /// @return Presents all the frames in a vector class
     std::vector<Frame> getAllFrames();
 
 signals:
+
     /// @brief Signal that notifies that the sprite pixels have been changed.
     void spriteChanged();
 
@@ -108,30 +127,32 @@ signals:
     /// @brief Signal that notifies that a frame has been duplicated in the sprite instance.
     void frameDuplicated();
 
+    /// @brief Signal that notifies that a sprite file has been loaded
     void loaded();
 
 public slots:
-         void updatePixel(const QPoint& position, const QColor& color, int width, int height);
+    void updatePixel(const QPoint& position, const QColor& color, int width, int height);
 
-         void setInitialFrame(int width, int height);
+    void setInitialFrame(int width, int height);
 
-         /// @brief Saves the sprite to a file with a .ssp extension.
-         /// @param const QString& fileName The name of the file to save the sprite to
-         /// @return bool True if the save was successful, false otherwise
-         bool save(const QString& fileName) const;
+    /// @brief Saves the sprite to a file with a .ssp extension.
+    /// @param const QString& fileName The name of the file to save the sprite to
+    /// @return bool True if the save was successful, false otherwise
+    bool save(const QString& fileName) const;
 
-         /// @brief Loads a sprite from a .ssp file.
-         /// @param const QString& fileName The name of the file to load the sprite from
-         /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
-         void load(const QString& fileName);
+    /// @brief Loads a sprite from a .ssp file.
+    /// @param const QString& fileName The name of the file to load the sprite from
+    /// @return std::optional<Sprite> A sprite instance if loading was successful, std::nullopt otherwise
+    void load(const QString& fileName);
 
-         void onDrawingStarted();
+    /// @brief Signifies that a drawing has started
+    void onDrawingStarted();
 
-         void undo();
+    /// @brief Stack to hold all the undo calls
+    void undo();
 
-         void redo();
-
-
+    /// @brief Stack to hold all the redo calls
+    void redo();
 };
 
 #endif // SPRITEMODEL_H

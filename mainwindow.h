@@ -15,8 +15,9 @@
 */
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class MainWindow;
-}
+
+    class MainWindow;
+} 
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -24,77 +25,115 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
+    /// @brief Main constuctor for the Main Window class
     MainWindow(QWidget *parent = nullptr);
+
+    /// @brief Destructor for the Main Window class
     ~MainWindow();
 
 signals:
 
-    //Signal that indicates whenever sprite was clicked
+    /// @brief Signal that indicates whenever sprite was clicked
     void playSpriteClicked();
-    void trueSizeClicked();
-    // void on_addFrameButton_Signal();
-    // void on_duplicateFrameButtonClicked_Signal();
 
-    // signal that sends the color selected from the color palette
+    /// @brief Signal to show the sprite play back at the true size pixel to pixel
+    void trueSizeClicked();
+
+    /// @brief Signal that sends the color selected from the color palette
     void colorSelected(QColor selectedColor);
-    // signal for updating the view of the sprite
+
+    /// @brief Signal for updating the view of the sprite
     void spriteUpdated();
-    // signal that emits the width and height
+
+    /// @brief Signal that emits the width and height
     void dimensionsSet(int width, int height);
-    // signal that triggers the save method
+
+    /// @brief Signal that triggers the save method
+    /// @param Filename to which the sprite is saved to
     void Save(QString fileName);
-    // signal that triggers the load method
+
+    /// @brief Signal that triggers the load method
+    /// @param Filename to load to sprite
     void Load(QString fileName);
-    // signal sent to enter drawing mode
+
+    /// @brief Signal sent to enter drawing mode
     void Drawing();
-    // signal sent to enter erasing mode
+
+    /// @brief Signal sent to enter erasing mode
     void Erasing();
-    // signal that emits the new value of the FPS
+
+    /// @brief Signal that emits the new value of the FPS
+    /// @param takes in an int
     void valueChanged(int);
-    // signal that refreshes the play sprite with new fps
+
+    /// @brief Signal that refreshes the play sprite with new fps
     void updatePlaySprite();
 
 private slots:
 
+    /// @brief Emits a signal to show the play back at the true size of the pixels
     void onShowTrueSizeClicked();
-    // emits signal for adding frame
+
+    /// @brief Emits signal for adding frame
     void onAddFrameButtonClicked();
-    // emits signal for deleting a frame
+
+    /// @brief Emits signal for deleting a frame
     void onDeleteFrameButtonClicked();
-    // emits signal for entering eraser mode
+
+    /// @brief Emits signal for entering eraser mode
     void onEraserButtonClicked();
-    // emits signal for entering pencil mode
+
+    /// @brief Emits signal for entering pencil mode
     void onPencilButtonClicked();
-    // emits signal for duplicating frame
+
+    /// @brief Emits signal for duplicating frame
     void onDuplicateFrameButtonClicked();
-    // emits signal for opening color palette
+
+    /// @brief Emits signal for opening color palette
     void onColorPickerClicked();
-    // emits signal for updating the list of frames
+
+    /// @brief Emits signal for updating the list of frames
     void updateFrameList();
-    // emits signal when the list selection of frames is clicked
+
+    /// @brief Emits signal when the list selection of frames is clicked
+    /// @param takes an a pointer to show what frames to select from
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
-    // receives image and displays it
+
+    /// @brief Receives image and displays it
     void provideCurrentImage();
-    // emits save signal and provides file name
+
+    /// @brief Emits save signal and provides file name
     void onSaveClicked();
-    // emits load signal and provides file name
+
+    /// @brief Emits load signal and provides file name
     void onLoadClicked();
 
+    /// @brief Emits the label updater for the FPS
+    /// @param int value to update the FPS to
     void updateFpsLabel(int value);
 
 private:
-    // UI responsible of the view
+
+    /// @brief UI responsible of the view
     Ui::MainWindow *ui;
-    // canva responsible for allowing the user to draw
+
+    /// @brief Canvas responsible for allowing the user to draw
+    /// @return an instance of a Drawing Canvas object
     DrawingCanvas *canvas;
-    // Model that handles the logic of the Sprite Editor
+
+    /// @brief Model that handles the logic of the Sprite Editor
+    /// @return an instance of the a Sprite Model object
     SpriteModel *spriteEditor;
-    // last color chosen
+
+    /// @brief Last color chosen
+    /// @return an instance of Qts QColor object
     QColor lastUsedColor;
-    // PlaySprite *playSpriteInstance;
 
 protected:
-    //Opening dialog for choosing the width and height of the document
+
+    /// @brief Opening dialog for choosing the width and height of the document
+    /// @param event to show and will override any other events
     void showEvent(QShowEvent *event) override;
 
 };
