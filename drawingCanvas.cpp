@@ -4,9 +4,8 @@ using namespace std;
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name sprite cpp file for assignment8
- * This cpp file contains the method implementations for choosing the width and height of the sprite
- * The user will choose the dimensions by a popup at the start of the program execution
+ * @name drawingCanvas h file for assignment8
+ * This h file contains the method implementations to draw.
  *
  * File and software practice principles reviewed by Joe Corbeil.
 */
