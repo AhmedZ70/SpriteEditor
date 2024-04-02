@@ -9,9 +9,8 @@
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name sprite h file for assignment8
- * This h file contains the outline methods for choosing the width and height of the sprite
- * The user will choose the dimensions by a popup at the start of the program execution
+ * @name drawingCanvas h file for assignment8
+ * This h file contains the outline methods used to draw
 */
 class DrawingCanvas : public QWidget {
     Q_OBJECT

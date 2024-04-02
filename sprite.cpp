@@ -10,10 +10,11 @@
  * This cpp file contains the method implementation for use within a sprite.
  * A sprite is essentially a collection of frames that can be animated.
  *
- * File and software principles reviewed by Johnny Song
+ * File and software principles reviewed by Johnny Song.
 */
 
 Sprite::Sprite(int width, int height): width(width), height(height) {
+
     // Set the initial current frame index to 0.
     currentFrame = 0;
 }
