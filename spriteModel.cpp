@@ -231,9 +231,9 @@ void SpriteModel::playAnimation() {
                     // Display error if index bounds are exceeded
                     qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
                 }
+                if (currentPlaybackFrameIndex >= (int)allFrames.size()) {
 
-                // Loop back to the first frame.
-                if (currentPlaybackFrameIndex >= allFrames.size()) {
+                    // Loop back to the first frame
                     currentPlaybackFrameIndex = 0;
                 }
             }
@@ -308,10 +308,8 @@ void SpriteModel::showTrueSize() {
                 } else {
                     qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
                 }
-                if (currentPlaybackFrameIndex >= allFrames.size()) {
-
-                    // Loop back to the first frame.
-                    currentPlaybackFrameIndex = 0;
+                if (currentPlaybackFrameIndex >= (int)allFrames.size()) {
+                    currentPlaybackFrameIndex = 0; // Loop back to the first frame
                 }
             }
         });

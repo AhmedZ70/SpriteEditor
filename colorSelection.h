@@ -21,6 +21,8 @@ public:
     /// @brief Pops a window containing a color palette
     explicit ColorSelection(QObject *parent = nullptr);
 
+    ~ColorSelection();
+
     /// @brief Allows the user to select a color from the color palette and sets the color to the currentColor variable
     /// @param initialColor the initial color which is always white
     /// @return The color that was selected

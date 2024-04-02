@@ -8,6 +8,7 @@
 #include "dimensionsdialog.h"
 #include <QTimer>
 #include <QFileDialog>
+#include <QMessageBox>
 
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
@@ -154,6 +155,26 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initializeHelpTexts() {
+    helpTexts["actionAdd"] = "Adds a new frame to your sprite.";
+    helpTexts["actionDelete"] = "Removes the selected frame from your sprite.";
+    helpTexts["actionDuplicate"] = "Creates a copy of the selected frame.";
+    helpTexts["actionLoad_2"] = "Opens a previously saved srpite.";
+    helpTexts["actionPlay_Back"] = "Plays back the current set of frames.";
+    helpTexts["actionRedo"] = "Redraws the last segment that was undone.";
+    helpTexts["actionSave_2"] = "Saves the current state of your sprite.";
+    helpTexts["actionShow_True_Size"] = "Playes-back and shows the actual size of the sprite.";
+    helpTexts["actionUndo"] = "Reverses the last segmant drawn in the selected frame.";
+}
+
+void MainWindow::showHelpDialog() {
+    QAction *action = qobject_cast<QAction*>(sender());
+    if (action) {
+        QString actionName = action->objectName();
+        QString helpText = helpTexts.value(actionName);
+        QMessageBox::information(this, tr("Help for ") + action->text(), helpText);
+    }
+}
 
 void MainWindow::updateFrameList() {
     ui->framesList->clear();

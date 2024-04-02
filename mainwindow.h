@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QListWidget>
 #include <QString>
+#include <QMap>
 #include "drawingcanvas.h"
 #include "spriteModel.h"
 
@@ -113,6 +114,8 @@ private slots:
     /// @param int value to update the FPS to
     void updateFpsLabel(int value);
 
+    void showHelpDialog();
+
 private:
 
     /// @brief UI responsible of the view
@@ -129,6 +132,10 @@ private:
     /// @brief Last color chosen
     /// @return An instance of Qts QColor object
     QColor lastUsedColor;
+
+    QMap<QString, QString> helpTexts;
+
+    void initializeHelpTexts();
 
 protected:
 
