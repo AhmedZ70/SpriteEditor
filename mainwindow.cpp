@@ -25,6 +25,15 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
 
+
+
+    // Sets up primary UI and initializes the sprite editor and drawing canvas.
+    ui->setupUi(this);
+    spriteEditor = new SpriteModel(this);
+    canvas = new DrawingCanvas(this);
+    initializeHelpTexts();
+
+
     // Connects the help menu functions to their respective functions
     connect(ui->actionAdd, &QAction::triggered, this, &MainWindow::showHelpDialog);
     connect(ui->actionDelete, &QAction::triggered, this, &MainWindow::showHelpDialog);
@@ -35,11 +44,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSave_2, &QAction::triggered, this, &MainWindow::showHelpDialog);
     connect(ui->actionShow_True_Size, &QAction::triggered, this, &MainWindow::showHelpDialog);
     connect(ui->actionUndo, &QAction::triggered, this, &MainWindow::showHelpDialog);
-
-    // Sets up primary UI and initializes the sprite editor and drawing canvas.
-    ui->setupUi(this);
-    spriteEditor = new SpriteModel(this);
-    canvas = new DrawingCanvas(this);
 
     // Sets the fps slider's minimum, maximum, and initial values.
     ui->fpsSlider->setMinimum(1);
