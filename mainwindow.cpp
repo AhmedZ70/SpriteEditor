@@ -283,8 +283,10 @@ void MainWindow::onColorPickerClicked(){
 
     // Handles the click event of the Color Picker button.
     QColor selectedColor = QColorDialog::getColor(Qt::white, this, "Select color");
+    if(selectedColor.isValid()){
     lastUsedColor = selectedColor;
     emit colorSelected(selectedColor);
+    }
 }
 
 void MainWindow::updateFpsLabel(int value) {

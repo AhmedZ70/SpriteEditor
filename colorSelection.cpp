@@ -26,6 +26,9 @@ ColorSelection::~ColorSelection(){
 
 QColor ColorSelection::selectColor(const QColor &initialColor)
 {
+    if(!initialColor.isValid()){
+        colorDialog->setCurrentColor(currentColor);
+    }
     // Set the initial color of the dialog
     colorDialog->setCurrentColor(initialColor);
 
