@@ -178,7 +178,7 @@ void MainWindow::initializeHelpTexts() {
     helpTexts["actionPlay_Back"] = "Plays back the current set of frames.";
     helpTexts["actionRedo"] = "Redraws the last segment that was undone.";
     helpTexts["actionSave_2"] = "Saves the current state of your sprite.";
-    helpTexts["actionShow_True_Size"] = "Playes-back and shows the actual size of the sprite.";
+    helpTexts["actionShow_True_Size"] = "Plays-back and shows the actual size of the sprite.";
     helpTexts["actionUndo"] = "Reverses the last segmant drawn in the selected frame.";
 }
 
