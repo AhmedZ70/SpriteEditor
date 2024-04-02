@@ -27,6 +27,7 @@ private:
     /// @brief Member variable that will hold the stack for any undo signals
     QStack<QImage> redoStack;
 
+
 public:
 
     /// @brief Frame constructor
@@ -53,13 +54,13 @@ public:
     /// @return Frame object after deserialization.
     static Frame fromJson(const QJsonObject& json);
 
-    /// @brief Signal to take a snapshot to store as a frame
+    /// @brief Takes a snapshot to store as a frame
     void takeSnapshot();
 
-    /// @brief Signal to undo any changes
+    /// @brief Undos any changes
     void undo();
 
-    /// @brief Signal to redo any changes
+    /// @brief Redos any changes
     void redo();
 };
 
