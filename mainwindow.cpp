@@ -13,9 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 
 {
+
     ui->setupUi(this);
     spriteEditor = new SpriteModel(this);
     canvas = new DrawingCanvas(this);
+
+
 
     ui->fpsSlider->setMinimum(1);
     ui->fpsSlider->setMaximum(30);
@@ -74,6 +77,50 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer::singleShot(0, this, [this]() {
         ui->pencilButton->click();
     });
+    QString sliderAndLabelStyleSheet = R"(
+    QSlider {
+        min-height: 150px;
+    }
+
+    QSlider::groove:vertical {
+        background: #E0E0E0;
+        border: none;
+        width: 20px;
+        border-radius: 10px;
+    }
+
+    QSlider::handle:vertical {
+        background: #FFFFFF;
+        border: 1px solid #CCCCCC;
+        height: 25px;
+        width: 20px;
+        margin: -2px 0;
+        border-radius: 10px;
+        position: absolute;
+    }
+
+    QSlider::add-page:vertical {
+        background: #CCCCCC;
+        border-radius: 10px;
+    }
+
+    QSlider::sub-page:vertical {
+        background: #D6D6D6;
+        border-radius: 10px;
+    }
+
+    QLabel {
+        background: #E0E0E0;
+        color: #333333;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        qproperty-alignment: 'AlignCenter';
+        min-width: 60px;
+    }
+)";
+    ui->fpsSlider->setStyleSheet(sliderAndLabelStyleSheet);
+    ui->fpsValueLabel->setStyleSheet(sliderAndLabelStyleSheet);
 
 }
 
