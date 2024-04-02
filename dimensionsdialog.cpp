@@ -84,9 +84,16 @@ void dimensionsDialog::accept() {
     }
 
     // Checks if width/height exceeds 256
-    if (height< 2 || height > 256|| width < 2 || width > 256) {
+    if ( height > 256|| width > 256) {
         QMessageBox::warning(this, tr("Input Error"), tr("Width and Height must be less than 256."));
         return;
+    }
+
+    //Check if width/height is less than 2
+    if(height < 2 || width < 2){
+        QMessageBox::warning(this, tr("Input Error"), tr("Width and height must be greater than 1."));
+        return;
+
     }
 
     QDialog::accept();
