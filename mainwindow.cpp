@@ -8,6 +8,8 @@
 #include "dimensionsdialog.h"
 #include <QTimer>
 #include <QFileDialog>
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -18,6 +20,18 @@ MainWindow::MainWindow(QWidget *parent)
     spriteEditor = new SpriteModel(this);
     canvas = new DrawingCanvas(this);
 
+    initializeHelpTexts();
+
+
+    connect(ui->actionAdd, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionDelete, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionDuplicate, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionLoad_2, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionPlay_Back, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionRedo, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionSave_2, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionShow_True_Size, &QAction::triggered, this, &MainWindow::showHelpDialog);
+    connect(ui->actionUndo, &QAction::triggered, this, &MainWindow::showHelpDialog);
 
 
     ui->fpsSlider->setMinimum(1);
@@ -129,6 +143,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initializeHelpTexts() {
+    helpTexts["actionAdd"] = "Adds a new frame to your sprite.";
+    helpTexts["actionDelete"] = "Removes the selected frame from your sprite.";
+    helpTexts["actionDuplicate"] = "Creates a copy of the selected frame.";
+    helpTexts["actionLoad_2"] = "Opens a previously saved srpite.";
+    helpTexts["actionPlay_Back"] = "Plays back the current set of frames.";
+    helpTexts["actionRedo"] = "Redraws the last segment that was undone.";
+    helpTexts["actionSave_2"] = "Saves the current state of your sprite.";
+    helpTexts["actionShow_True_Size"] = "Playes-back and shows the actual size of the sprite.";
+    helpTexts["actionUndo"] = "Reverses the last segmant drawn in the selected frame.";
+}
+
+void MainWindow::showHelpDialog() {
+    QAction *action = qobject_cast<QAction*>(sender());
+    if (action) {
+        QString actionName = action->objectName();
+        QString helpText = helpTexts.value(actionName);
+        QMessageBox::information(this, tr("Help for ") + action->text(), helpText);
+    }
+}
+
 void MainWindow::updateFrameList() {
     ui->framesList->clear();
     for (int i = 0; i < spriteEditor->getFrameCount(); ++i) {
@@ -216,8 +251,6 @@ void MainWindow::showEvent(QShowEvent *event) {
                 emit dimensionsSet(width, height);
             }
         });
-
-
 }
 
 void MainWindow:: onSaveClicked()

@@ -20,6 +20,10 @@ ColorSelection::ColorSelection(QObject *parent)
     currentColor.setRgb(255,255,255,255);
 }
 
+ColorSelection::~ColorSelection(){
+    delete colorDialog;
+}
+
 QColor ColorSelection::selectColor(const QColor &initialColor)
 {
     // Set the initial color of the dialog

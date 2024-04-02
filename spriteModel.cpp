@@ -123,7 +123,7 @@ void SpriteModel::playAnimation() {
 
         playbackTimer = new QTimer(playbackPopup);
         connect(playbackTimer, &QTimer::timeout, this, [this, imageLabel]() {
-            if (currentPlaybackFrameIndex < allFrames.size()) {
+            if (currentPlaybackFrameIndex < (int)allFrames.size()) {
                 QImage img = allFrames[currentPlaybackFrameIndex++].getImage();
                 if (!img.isNull()) {
                     // Scale the image to a new size
@@ -133,7 +133,7 @@ void SpriteModel::playAnimation() {
                 } else {
                     qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
                 }
-                if (currentPlaybackFrameIndex >= allFrames.size()) {
+                if (currentPlaybackFrameIndex >= (int)allFrames.size()) {
                     currentPlaybackFrameIndex = 0; // Loop back to the first frame
                 }
             }
@@ -145,7 +145,7 @@ void SpriteModel::playAnimation() {
             playbackPopup = nullptr; // Reset the popup pointer
         });
 
-        playbackTimer->start(1000 / fps); // Adjust fps as needed
+        playbackTimer->start(1000 / fps);
     }
 
     if (playbackPopup && !playbackPopup->isVisible()) {
@@ -170,14 +170,14 @@ void SpriteModel::showTrueSize() {
 
         playbackTimer = new QTimer(playbackPopup);
         connect(playbackTimer, &QTimer::timeout, this, [this, imageLabel]() {
-            if (currentPlaybackFrameIndex < allFrames.size()) {
+            if (currentPlaybackFrameIndex < (int)allFrames.size()) {
                 QImage img = allFrames[currentPlaybackFrameIndex++].getImage();
                 if (!img.isNull()) {
                     imageLabel->setPixmap(QPixmap::fromImage(img)); // Display image at true size
                 } else {
                     qDebug() << "Image at index" << currentPlaybackFrameIndex << "is null.";
                 }
-                if (currentPlaybackFrameIndex >= allFrames.size()) {
+                if (currentPlaybackFrameIndex >= (int)allFrames.size()) {
                     currentPlaybackFrameIndex = 0; // Loop back to the first frame
                 }
             }
