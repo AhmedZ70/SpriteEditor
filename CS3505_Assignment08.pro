@@ -10,7 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     colorSelection.cpp \
-    dimensionsDialog.cpp \
+    dimensionsdialog.cpp \
     drawingCanvas.cpp \
     frame.cpp \
     main.cpp \
@@ -20,7 +20,7 @@ SOURCES += \
 
 HEADERS += \
     colorSelection.h \
-    dimensionsDialog.h \
+    dimensionsdialog.h \
     drawingCanvas.h \
     frame.h \
     mainwindow.h \
