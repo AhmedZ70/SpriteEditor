@@ -98,7 +98,7 @@ private slots:
     void updateFrameList();
 
     /// @brief Emits signal when the list selection of frames is clicked
-    /// @param takes an a pointer to show what frames to select from
+    /// @param Takes an a pointer to show what frames to select from
     void OnFrameListWidgetItemClicked(QListWidgetItem *item);
 
     /// @brief Receives image and displays it
@@ -122,15 +122,15 @@ private:
     Ui::MainWindow *ui;
 
     /// @brief Canvas responsible for allowing the user to draw
-    /// @return an instance of a Drawing Canvas object
+    /// @return An instance of a Drawing Canvas object
     DrawingCanvas *canvas;
 
     /// @brief Model that handles the logic of the Sprite Editor
-    /// @return an instance of the a Sprite Model object
+    /// @return An instance of the a Sprite Model object
     SpriteModel *spriteEditor;
 
     /// @brief Last color chosen
-    /// @return an instance of Qts QColor object
+    /// @return An instance of Qts QColor object
     QColor lastUsedColor;
 
     QMap<QString, QString> helpTexts;
@@ -140,7 +140,7 @@ private:
 protected:
 
     /// @brief Opening dialog for choosing the width and height of the document
-    /// @param event to show and will override any other events
+    /// @param Event to show and will override any other events
     void showEvent(QShowEvent *event) override;
 
 };

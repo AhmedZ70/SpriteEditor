@@ -15,9 +15,9 @@
 /**
  * @author Joseph Corbeil, Johnny Song, Ezekiel Jaramillo, Ahmed Zahran, Raj Reddy, Joel Ronca
  * @date April. 1, 2024
- * @name sprite h file for assignment8
- * This h file contains the outlined methods for use within a sprite.
- * A sprite is essentially a collection of frames that can be animated.
+ * @name spriteModel h file for assignment8
+ * This h file contains the outlined methods for use within the spriteModel class.
+ * Sprite Model will control the frames, animations, connect the drawing canvas, and dimension dialog.
 */
 
 class SpriteModel : public QObject {
