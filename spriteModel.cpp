@@ -202,6 +202,10 @@ void SpriteModel::onDrawingStarted(){
 
 void SpriteModel::setFPS(int newVal){
     this->fps = newVal;
+    if (fps > 0) {
+        int interval = 1000 / fps;
+        playbackTimer->setInterval(interval);
+    }
 }
 void SpriteModel::undo() {
     sprite.getFrame(currentFrameIndex).undo();
